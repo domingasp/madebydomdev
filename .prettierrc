@@ -1,0 +1,14 @@
+{
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ],
+  "tailwindFunctions": ["tv"],
+  "tailwindStylesheet": "./src/styles/globals.css"
+}

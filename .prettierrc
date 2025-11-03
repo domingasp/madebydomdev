@@ -10,5 +10,5 @@
     }
   ],
   "tailwindFunctions": ["tv"],
-  "tailwindStylesheet": "./src/styles/globals.css"
+  "tailwindStylesheet": "./src/styles/global.css"
 }

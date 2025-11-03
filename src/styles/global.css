@@ -1,9 +1,37 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: var(--color-neutral-800);
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-  --color-foreground: var(--color-neutral-100);
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+
+  --color-background: var(--color-neutral-100);
+
+  --color-foreground: var(--color-neutral-800);
+}
+
+@layer themes {
+  [data-theme="dark"] {
+    --color-background: var(--color-neutral-800);
+
+    --color-foreground: var(--color-neutral-100);
+  }
 }
 
 html {

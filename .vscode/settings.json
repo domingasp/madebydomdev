@@ -1,0 +1,10 @@
+{
+  "git.inputValidation": true,
+  "git.inputValidationSubjectLength": 50,
+  "git.inputValidationLength": 72,
+  "css.customData": [".vscode/tailwind.json"],
+  "tailwindCSS.experimental.classRegex": [
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "tailwindCSS.rootFontSize": 14
+}

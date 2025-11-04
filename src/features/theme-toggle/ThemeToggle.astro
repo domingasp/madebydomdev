@@ -1,0 +1,159 @@
+---
+import { cn } from "tailwind-variants";
+import { Icon } from "astro-icon/components";
+---
+
+<button
+  data-theme-toggle
+  class={cn([
+    "pd-md rounded-lg",
+    "hover:bg-surface-hover hover:shadow-md",
+    "active:bg-surface-active",
+  ])({ twMerge: true })}
+>
+  <Icon name="lucide:moon" data-theme-icon="dark" class="icon hidden" />
+  <Icon name="lucide:sun" data-theme-icon="light" class="icon hidden" />
+  <Icon name="lucide:laptop" data-theme-icon="system" class="icon hidden" />
+</button>
+
+<!-- Prevent FOUC -->
+<script is:inline>
+  (function () {
+    const theme = localStorage.getItem("theme") || "system";
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    document.documentElement.dataset.theme =
+      theme === "system" ? (prefersDark ? "dark" : "light") : theme;
+  })();
+</script>
+
+<script>
+  const themes = { LIGHT: "light", DARK: "dark", SYSTEM: "system" } as const;
+  type Themes = (typeof themes)[keyof typeof themes];
+
+  const themeOrder: Themes[] = [themes.LIGHT, themes.DARK, themes.SYSTEM];
+
+  function applyTheme(theme: Themes) {
+    if (theme === themes.SYSTEM) {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      document.documentElement.dataset.theme = prefersDark
+        ? themes.DARK
+        : themes.LIGHT;
+    } else {
+      document.documentElement.dataset.theme = theme;
+    }
+
+    updateThemeIcon(theme);
+  }
+
+  function updateThemeIcon(theme: Themes) {
+    const icons = document.querySelectorAll("[data-theme-icon]");
+    icons.forEach((icon) => {
+      const el = icon as HTMLElement;
+      if (el.getAttribute("data-theme-icon") === theme) {
+        el.classList.remove("hidden");
+        el.classList.add("animate-slide-in-from-left");
+        el.classList.remove("animate-slide-out-to-right");
+      } else if (!el.classList.contains("hidden")) {
+        el.classList.add("animate-slide-out-to-right");
+        el.classList.remove("animate-slide-in-from-left");
+        setTimeout(() => el.classList.add("hidden"), 300);
+      }
+    });
+  }
+
+  function handleThemeToggle() {
+    const current = (localStorage.getItem("theme") || themes.SYSTEM) as Themes;
+    const next =
+      themeOrder[(themeOrder.indexOf(current) + 1) % themeOrder.length];
+
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  }
+
+  function setupThemeToggle() {
+    const btn = document.querySelector("[data-theme-toggle]");
+    btn?.addEventListener("click", handleThemeToggle);
+  }
+
+  function initTheme() {
+    const savedTheme = (localStorage.getItem("theme") ||
+      themes.SYSTEM) as Themes;
+    applyTheme(savedTheme);
+  }
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      const savedTheme = (localStorage.getItem("theme") ||
+        themes.SYSTEM) as Themes;
+
+      if (savedTheme === themes.SYSTEM) {
+        applyTheme(themes.SYSTEM);
+      }
+    });
+
+  initTheme();
+  setupThemeToggle();
+
+  document.addEventListener("astro:after-swap", () => {
+    initTheme();
+    setupThemeToggle();
+  });
+</script>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @keyframes slide-in-from-left {
+    from {
+      transform: translateX(-12px) scale(75%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0) scale(100%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-to-right {
+    from {
+      transform: translateX(0) scale(100%);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(12px) scale(75%);
+      opacity: 0;
+    }
+  }
+
+  button[data-theme-toggle] {
+    @apply transition-all;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon {
+    position: absolute;
+  }
+
+  .icon:not(.hidden) {
+    display: inline-block;
+  }
+
+  .animate-slide-in-from-left {
+    animation: slide-in-from-left 0.2s ease-in forwards;
+  }
+
+  .animate-slide-out-to-right {
+    animation: slide-out-to-right 0.2s ease-out forwards;
+  }
+</style>

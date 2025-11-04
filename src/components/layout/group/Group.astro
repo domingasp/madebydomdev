@@ -1,0 +1,13 @@
+---
+import { group, type GroupVariants } from "./group";
+
+type Props = GroupVariants & { class?: string };
+
+const props: Props = Astro.props;
+
+const styles = group(props);
+---
+
+<div class={styles}>
+  <slot />
+</div>

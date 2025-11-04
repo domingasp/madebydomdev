@@ -50,27 +50,3 @@ const posts = (await getCollection("blog")).sort(
     <Footer />
   </body>
 </html>
-
-<script>
-  import { OverlayScrollbars } from "overlayscrollbars";
-
-  const initBodyOverlayScrollbars = () => {
-    OverlayScrollbars(
-      {
-        target: document.body,
-        cancel: {
-          body: null,
-        },
-      },
-      {
-        scrollbars: {
-          theme: "os-theme-madebydomdev",
-        },
-      }
-    );
-  };
-
-  document.addEventListener("DOMContentLoaded", initBodyOverlayScrollbars);
-
-  document.addEventListener("astro:after-swap", initBodyOverlayScrollbars);
-</script>

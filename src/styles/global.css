@@ -40,6 +40,10 @@
 
   --color-foreground: var(--color-neutral-800);
 
+  --color-foreground-secondary: oklch(
+    from var(--color-foreground) calc(l + 0.25) c h
+  );
+
   --color-surface: var(--color-white);
   --color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
   --color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
@@ -58,6 +62,10 @@
     --color-background: var(--color-neutral-800);
 
     --color-foreground: var(--color-neutral-100);
+
+    --color-foreground-secondary: oklch(
+      from var(--color-foreground) calc(l - 0.25) c h
+    );
 
     --color-surface: var(--color-neutral-800);
     --color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
@@ -90,6 +98,10 @@ header,
 main,
 footer {
   @apply mx-auto max-w-screen-sm;
+}
+
+body {
+  @apply overflow-hidden;
 }
 
 main {

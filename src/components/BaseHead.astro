@@ -41,3 +41,30 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta name="description" content={description} />
 
 <ClientRouter />
+
+<script>
+  import { OverlayScrollbars } from "overlayscrollbars";
+
+  const initBodyOverlayScrollbars = () => {
+    OverlayScrollbars(
+      {
+        target: document.body,
+        cancel: {
+          body: null,
+        },
+      },
+      {
+        scrollbars: {
+          theme: "os-theme-madebydomdev",
+        },
+      }
+    );
+
+    // Prevent Flash of Native Scrollbars,
+    // data-overlayscrollbars-initialize alone did not work
+    document.body.classList.remove("overflow-hidden");
+  };
+
+  document.addEventListener("DOMContentLoaded", initBodyOverlayScrollbars);
+  document.addEventListener("astro:after-swap", initBodyOverlayScrollbars);
+</script>

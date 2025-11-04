@@ -116,3 +116,8 @@ main {
     --os-padding-axis: 4px;
   }
 }
+
+button,
+.icon-button {
+  @apply rounded-sm p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
+}

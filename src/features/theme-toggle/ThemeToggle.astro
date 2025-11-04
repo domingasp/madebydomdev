@@ -3,14 +3,7 @@ import { cn } from "tailwind-variants";
 import { Icon } from "astro-icon/components";
 ---
 
-<button
-  data-theme-toggle
-  class={cn([
-    "pd-md rounded-lg",
-    "hover:bg-surface-hover hover:shadow-md",
-    "active:bg-surface-active",
-  ])({ twMerge: true })}
->
+<button data-theme-toggle aria-label="Toggle Theme" title="Toggle Theme">
   <Icon name="lucide:moon" data-theme-icon="dark" class="icon hidden" />
   <Icon name="lucide:sun" data-theme-icon="light" class="icon hidden" />
   <Icon name="lucide:laptop" data-theme-icon="system" class="icon hidden" />
@@ -137,8 +130,8 @@ import { Icon } from "astro-icon/components";
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 27px;
+    height: 27px;
   }
 
   .icon {

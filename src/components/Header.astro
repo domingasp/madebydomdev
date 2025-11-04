@@ -12,11 +12,7 @@ import { Icon } from "astro-icon/components";
       <h2>
         <a href="/" class="font-semibold">
           <Group spacing="sm">
-            <Icon
-              name="logo"
-              size={24}
-              class="text-foreground not-dark:invert"
-            />
+            <Icon name="logo" class="text-foreground not-dark:invert" />
             {SITE_TITLE}
           </Group>
         </a>
@@ -28,7 +24,18 @@ import { Icon } from "astro-icon/components";
           <HeaderLink href="/about">About</HeaderLink>
         </div>
 
-        <ThemeToggle />
+        <Group spacing="sm">
+          <ThemeToggle />
+          <a
+            aria-label="RSS Feed"
+            title="RSS Feed"
+            class="icon-button"
+            href="/rss.xml"
+            target="_blank"
+          >
+            <Icon name="lucide:rss" />
+          </a>
+        </Group>
       </Group>
     </Group>
   </nav>

@@ -82,6 +82,10 @@
   }
 }
 
+::selection {
+  background-color: #f89b29;
+}
+
 html {
   font-size: 14px;
 }
@@ -138,5 +142,5 @@ main {
 
 button,
 .icon-button {
-  @apply rounded-sm p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
+  @apply rounded-md p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
 }

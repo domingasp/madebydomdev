@@ -6,14 +6,14 @@ import Group from "./layout/group/Group.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<header>
+<header transition:persist class="w-full">
   <nav>
     <Group justify="between" class="p-md">
       <h2>
         <a href="/" class="font-semibold">
           <Group spacing="sm">
             <Icon name="logo" class="text-foreground not-dark:invert" />
-            {SITE_TITLE}
+            <span class="hidden xs:inline">{SITE_TITLE}</span>
           </Group>
         </a>
       </h2>

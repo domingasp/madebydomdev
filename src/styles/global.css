@@ -21,6 +21,8 @@
 @theme {
   --font-sans: "Inter", sans-serif;
 
+  --breakpoint-xs: 30rem;
+
   --gap-xs: var(--spacing);
   --gap-sm: calc(var(--spacing) * 2);
   --gap-md: calc(var(--spacing) * 4);
@@ -87,6 +89,10 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
+
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 [data-icon] {
@@ -106,6 +112,7 @@ body {
 
 main {
   @apply px-md;
+  flex: 1;
 }
 
 /* overlayscrollbars theme */

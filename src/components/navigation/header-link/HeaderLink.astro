@@ -1,8 +1,9 @@
 ---
+
 import type { HTMLAttributes } from "astro/types";
-import Group from "../../layout/group/Group.astro";
-import { headerLink, type HeaderLinkVariants } from "./header-link.variants";
+import Group from "../../layout/group/Group.vue";
 import { isHeaderLinkActive } from "./header-link.utils";
+import { type HeaderLinkVariants, headerLink } from "./header-link.variants";
 
 type Props = HTMLAttributes<"a"> & HeaderLinkVariants;
 
@@ -44,7 +45,9 @@ const { base, line } = headerLink({ active });
     document
       .querySelectorAll<HTMLAnchorElement>("[data-header-link]")
       .forEach((link) => {
-        const href = link.dataset.href!;
+        if (!link.dataset.href) return;
+        
+        const href = link.dataset.href;
         const active = isHeaderLinkActive(href, pathname);
         const { base, line } = headerLink({ active });
 

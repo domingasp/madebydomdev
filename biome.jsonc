@@ -1,0 +1,82 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"nursery": {
+				"useVueDefineMacrosOrder": "warn",
+				"useSortedClasses": {
+					"level": "warn",
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["cva", "cx"]
+					}
+				}
+			}
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	// A known limitation due to cross boundary usage
+	// https://github.com/biomejs/biome/issues/7990
+	// https://next.biomejs.dev/internals/language-support/#linting-html-ish-languages
+	"overrides": [
+		{
+			"includes": ["**/*.astro", "**/*.vue"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.d.ts"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		}
+	]
+}

@@ -1,12 +1,12 @@
 import { tv } from "tailwind-variants";
 
 export const spacing = tv({
-  variants: {
-    spacing: {
-      lg: "gap-lg",
-      md: "gap-md",
-      sm: "gap-sm",
-      xs: "gap-xs",
-    },
-  },
+	variants: {
+		spacing: {
+			lg: "gap-lg",
+			md: "gap-md",
+			sm: "gap-sm",
+			xs: "gap-xs",
+		},
+	},
 });

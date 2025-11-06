@@ -10,7 +10,7 @@ import { Icon } from "astro-icon/components";
 
 <!-- Prevent FOUC -->
 <script is:inline>
-  (function () {
+  (() => {
     const theme = localStorage.getItem("theme") || "system";
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"

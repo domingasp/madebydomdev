@@ -1,146 +1,146 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-stretch: 75% 125%;
-  font-style: normal;
+	font-family: "Inter";
+	src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+	font-weight: 100 900;
+	font-stretch: 75% 125%;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-stretch: 75% 125%;
-  font-style: italic;
+	font-family: "Inter";
+	src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+	font-weight: 100 900;
+	font-stretch: 75% 125%;
+	font-style: italic;
 }
 
 @theme {
-  --font-sans: "Inter", sans-serif;
+	--font-sans: "Inter", sans-serif;
 
-  --breakpoint-xs: 30rem;
+	--breakpoint-xs: 30rem;
 
-  --gap-xs: var(--spacing);
-  --gap-sm: calc(var(--spacing) * 2);
-  --gap-md: calc(var(--spacing) * 4);
-  --gap-lg: calc(var(--spacing) * 6);
+	--gap-xs: var(--spacing);
+	--gap-sm: calc(var(--spacing) * 2);
+	--gap-md: calc(var(--spacing) * 4);
+	--gap-lg: calc(var(--spacing) * 6);
 
-  --padding-xs: calc(var(--spacing) * 1);
-  --padding-sm: calc(var(--spacing) * 2);
-  --padding-sm-md: calc(var(--spacing) * 2.5);
-  --padding-md: calc(var(--spacing) * 3);
-  --padding-lg: calc(var(--spacing) * 4);
-  --padding-xl: calc(var(--spacing) * 5);
-  --padding-2xl: calc(var(--spacing) * 6);
-  --padding-3xl: calc(var(--spacing) * 7);
-  --padding-4xl: calc(var(--spacing) * 8);
+	--padding-xs: calc(var(--spacing) * 1);
+	--padding-sm: calc(var(--spacing) * 2);
+	--padding-sm-md: calc(var(--spacing) * 2.5);
+	--padding-md: calc(var(--spacing) * 3);
+	--padding-lg: calc(var(--spacing) * 4);
+	--padding-xl: calc(var(--spacing) * 5);
+	--padding-2xl: calc(var(--spacing) * 6);
+	--padding-3xl: calc(var(--spacing) * 7);
+	--padding-4xl: calc(var(--spacing) * 8);
 
-  --color-background: var(--color-neutral-100);
+	--color-background: var(--color-neutral-100);
 
-  --color-foreground: var(--color-neutral-800);
+	--color-foreground: var(--color-neutral-800);
 
-  --color-foreground-secondary: oklch(
-    from var(--color-foreground) calc(l + 0.25) c h
-  );
+	--color-foreground-secondary: oklch(
+		from var(--color-foreground) calc(l + 0.25) c h
+	);
 
-  --color-surface: var(--color-white);
-  --color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
-  --color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
+	--color-surface: var(--color-white);
+	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
+	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
 
-  --color-fill-inverse: var(--color-neutral-800);
-  --color-fill-inverse-hover: oklch(
-    from var(--color-fill-inverse) calc(l + 0.08) c h
-  );
-  --color-fill-inverse-active: oklch(
-    from var(--color-fill-inverse) calc(l + 0.16) c h
-  );
+	--color-fill-inverse: var(--color-neutral-800);
+	--color-fill-inverse-hover: oklch(
+		from var(--color-fill-inverse) calc(l + 0.08) c h
+	);
+	--color-fill-inverse-active: oklch(
+		from var(--color-fill-inverse) calc(l + 0.16) c h
+	);
 }
 
 @layer themes {
-  [data-theme="dark"] {
-    --color-background: var(--color-neutral-800);
+	[data-theme="dark"] {
+		--color-background: var(--color-neutral-800);
 
-    --color-foreground: var(--color-neutral-100);
+		--color-foreground: var(--color-neutral-100);
 
-    --color-foreground-secondary: oklch(
-      from var(--color-foreground) calc(l - 0.25) c h
-    );
+		--color-foreground-secondary: oklch(
+			from var(--color-foreground) calc(l - 0.25) c h
+		);
 
-    --color-surface: var(--color-neutral-800);
-    --color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
+		--color-surface: var(--color-neutral-800);
+		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
 
-    --color-fill-inverse: var(--color-neutral-100);
-    --color-fill-inverse-hover: oklch(
-      from var(--color-fill-inverse) calc(l - 0.03) c h
-    );
-    --color-fill-inverse-active: oklch(
-      from var(--color-fill-inverse) calc(l + 0.06) c h
-    );
-  }
+		--color-fill-inverse: var(--color-neutral-100);
+		--color-fill-inverse-hover: oklch(
+			from var(--color-fill-inverse) calc(l - 0.03) c h
+		);
+		--color-fill-inverse-active: oklch(
+			from var(--color-fill-inverse) calc(l + 0.06) c h
+		);
+	}
 }
 
 ::selection {
-  background-color: #f89b29;
+	background-color: #f89b29;
 }
 
 html {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+	background-color: var(--color-background);
+	color: var(--color-foreground);
 
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
 
 [data-icon] {
-  width: 20px;
-  height: 20px;
+	width: 20px;
+	height: 20px;
 }
 
 header,
 main,
 footer {
-  @apply mx-auto max-w-screen-sm;
+	@apply mx-auto max-w-screen-sm;
 }
 
 body {
-  @apply overflow-hidden;
+	@apply overflow-hidden;
 }
 
 main {
-  @apply px-md;
-  flex: 1;
+	@apply px-md;
+	flex: 1;
 }
 
 /* overlayscrollbars theme */
 .os-theme-madebydomdev {
-  --os-size: 22px;
-  --os-padding-perpendicular: 8px;
-  --os-padding-axis: 8px;
-  --os-track-border-radius: 10px;
-  --os-handle-interactive-area-offset: 4px;
-  --os-handle-border-radius: 10px;
-  --os-handle-bg: var(--color-fill-inverse);
-  --os-handle-bg-hover: var(--color-fill-inverse-hover);
-  --os-handle-bg-active: var(--color-fill-inverse-active);
+	--os-size: 22px;
+	--os-padding-perpendicular: 8px;
+	--os-padding-axis: 8px;
+	--os-track-border-radius: 10px;
+	--os-handle-interactive-area-offset: 4px;
+	--os-handle-border-radius: 10px;
+	--os-handle-bg: var(--color-fill-inverse);
+	--os-handle-bg-hover: var(--color-fill-inverse-hover);
+	--os-handle-bg-active: var(--color-fill-inverse-active);
 }
 
 @media (width < 580px) {
-  .os-theme-madebydomdev {
-    --os-size: 10px;
-    --os-padding-perpendicular: 2px;
-    --os-padding-axis: 4px;
-  }
+	.os-theme-madebydomdev {
+		--os-size: 10px;
+		--os-padding-perpendicular: 2px;
+		--os-padding-axis: 4px;
+	}
 }
 
 button,
 .icon-button {
-  @apply rounded-md p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
+	@apply rounded-md p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
 }

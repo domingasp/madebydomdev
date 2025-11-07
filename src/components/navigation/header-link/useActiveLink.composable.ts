@@ -11,7 +11,7 @@ function isHeaderLinkActive(href: string, pathname: string): boolean {
 	return href === pathname || href === `/${subpath?.[0] || ""}`;
 }
 
-export function useActiveLink(href: string) {
+export function useActiveLink(href: string, initialPathname?: string) {
 	const isActive = ref(false);
 
 	function updateActive(pathname: string = window.location.pathname) {
@@ -22,8 +22,14 @@ export function useActiveLink(href: string) {
 		updateActive();
 	}
 
+	if (initialPathname) {
+		isActive.value = isHeaderLinkActive(href, initialPathname);
+	}
+
 	onMounted(() => {
-		updateActive();
+		if (!initialPathname) {
+			updateActive();
+		}
 		document.addEventListener("astro:page-load", handlePageLoad);
 	});
 
@@ -33,6 +39,5 @@ export function useActiveLink(href: string) {
 
 	return {
 		isActive,
-		updateActive,
 	};
 }

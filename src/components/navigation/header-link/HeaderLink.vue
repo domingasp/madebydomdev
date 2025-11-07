@@ -12,8 +12,7 @@ const props = defineProps<{
 
 const { href, astroPathname } = props;
 
-const { isActive, updateActive } = useActiveLink(href);
-updateActive(astroPathname);
+const { isActive } = useActiveLink(href, astroPathname);
 const styles = computed(() => headerLink({ active: isActive.value }));
 </script>
 

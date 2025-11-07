@@ -1,24 +1,19 @@
 ---
-import { Icon } from "astro-icon/components";
+import IconLaptop from "~icons/lucide/laptop";
+import IconMoon from "~icons/lucide/moon";
+import IconSun from "~icons/lucide/sun";
 ---
 
 <button data-theme-toggle aria-label="Toggle Theme" title="Toggle Theme">
-  <Icon name="lucide:moon" data-theme-icon="dark" class="icon hidden" />
-  <Icon name="lucide:sun" data-theme-icon="light" class="icon hidden" />
-  <Icon name="lucide:laptop" data-theme-icon="system" class="icon hidden" />
+  <IconMoon data-theme-icon="dark" class="icon hidden" />
+  <IconSun data-theme-icon="light" class="icon hidden" />
+  <IconLaptop data-theme-icon="system" class="icon hidden" />
 </button>
 
-<!-- Prevent FOUC -->
+<!-- Prevent FOUC for theme icons -->
 <script is:inline>
   (() => {
     const theme = localStorage.getItem("theme") || "system";
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    document.documentElement.dataset.theme =
-      theme === "system" ? (prefersDark ? "dark" : "light") : theme;
-
-    // Avoid FOUC for theme icons
     document.querySelectorAll("[data-theme-icon]").forEach((icon) => {
       if (icon.getAttribute("data-theme-icon") === theme) {
         icon.classList.remove("hidden");
@@ -30,7 +25,7 @@ import { Icon } from "astro-icon/components";
 </script>
 
 <script>
-  const themes = { LIGHT: "light", DARK: "dark", SYSTEM: "system" } as const;
+  const themes = { DARK: "dark", LIGHT: "light", SYSTEM: "system" } as const;
   type Themes = (typeof themes)[keyof typeof themes];
 
   const themeOrder: Themes[] = [themes.LIGHT, themes.DARK, themes.SYSTEM];

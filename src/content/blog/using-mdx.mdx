@@ -18,9 +18,9 @@ If you have existing content authored in MDX, this integration will hopefully ma
 Here is how you import and use a UI component inside of MDX.  
 When you open this page in the browser, you should see the clickable button below.
 
-import HeaderLink from "../../components/navigation/header-link/HeaderLink.astro";
+import HeaderLink from "../../components/navigation/header-link/HeaderLink.vue";
 
-<HeaderLink href="#" onclick="alert('clicked!')">
+<HeaderLink href="#" onclick="alert('clicked!')" astroPathname="#">
   Embedded component in MDX
 </HeaderLink>
 

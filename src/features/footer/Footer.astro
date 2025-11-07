@@ -1,8 +1,9 @@
 ---
-import { Icon } from "astro-icon/components";
 import { cn } from "tailwind-variants";
+import IconGithub from "~icons/custom/github";
+import IconLinkedin from "~icons/custom/linkedin";
 import Group from "../../components/layout/group/Group.vue";
-import Stack from "../../components/layout/stack/Stack.astro";
+import Stack from "../../components/layout/stack/Stack.vue";
 
 const today = new Date();
 ---
@@ -20,7 +21,7 @@ const today = new Date();
         ])({ twMerge: true })}
       >
         <span class="sr-only">Go to Domingas' GitHub repo</span>
-        <Icon name="github" />
+				<IconGithub />
       </a>
 
       <a
@@ -33,7 +34,7 @@ const today = new Date();
         ])({ twMerge: true })}
       >
         <span class="sr-only">Go to Domingas' LinkedIn profile</span>
-        <Icon name="linkedin" />
+				<IconLinkedin />
       </a>
     </Group>
 

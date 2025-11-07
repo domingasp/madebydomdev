@@ -42,16 +42,51 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <ClientRouter />
 
+<script is:inline>
+	const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+	function applyTheme(theme) {
+		const prefersDark = prefersDarkQuery.matches;
+
+		document.documentElement.dataset.theme =
+			theme === "system" ? (prefersDark ? "dark" : "light") : theme;
+	}
+
+	function getStoredTheme() {
+		try {
+			return localStorage.getItem("theme") || "system";
+		} catch {
+			return "system";
+		}
+	}
+
+	function initTheme() {
+		applyTheme(getStoredTheme());
+	}
+
+	prefersDarkQuery
+		.addEventListener("change", () => {
+			if (getStoredTheme() === "system") {
+				applyTheme("system");
+			}
+		});
+
+	// Re-apply theme after Astro page navigation
+	document.addEventListener("astro:after-swap", initTheme);
+
+	initTheme();
+</script>
+
 <script>
   import { OverlayScrollbars } from "overlayscrollbars";
 
   const initBodyOverlayScrollbars = () => {
     OverlayScrollbars(
       {
-        target: document.body,
         cancel: {
           body: null,
         },
+        target: document.body,
       },
       {
         scrollbars: {

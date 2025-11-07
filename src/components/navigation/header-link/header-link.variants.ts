@@ -5,7 +5,7 @@ export const headerLink = tv({
 		base: "group rounded-md",
 		line: [
 			"relative",
-			"after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-1 after:w-full after:content-['']",
+			"after:-z-1 after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:content-['']",
 			"after:bg-linear-to-r after:from-[#FF0F7B] after:to-[#F89B29]",
 			"after:transition-transform after:duration-250",
 			"after:origin-bottom-right after:scale-x-0",
@@ -16,10 +16,14 @@ export const headerLink = tv({
 	variants: {
 		active: {
 			true: {
-				line: "font-medium after:origin-bottom-left after:scale-x-100",
+				line: "after:origin-bottom-left after:scale-x-100",
 			},
 		},
 	},
 });
 
-export type HeaderLinkVariants = VariantProps<typeof headerLink>;
+type Variants = VariantProps<typeof headerLink>;
+
+export type HeaderLinkVariants = {
+	active?: Variants["active"];
+};

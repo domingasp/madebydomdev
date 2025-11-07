@@ -1,33 +1,32 @@
 ---
-import { Icon } from "astro-icon/components";
+import IconLogo from "~icons/custom/logo"
+import IconRss from "~icons/lucide/rss"
 import Group from "../../components/layout/group/Group.vue";
-import HeaderLink from "../../components/navigation/header-link/HeaderLink.astro";
+import HeaderLink from "../../components/navigation/header-link/HeaderLink.vue";
 import { SITE_TITLE } from "../../consts";
-import ThemeToggle from "../theme-toggle/ThemeToggle.astro";
+import ThemeToggle from "../theme-toggle/ThemeToggle.vue";
+
+const pathname = Astro.url.pathname;
 ---
 
 <header transition:persist class="w-full">
 	<nav>
 		<Group justify="between" class="p-md">
 			<h2>
-				<HeaderLink href="/">
-					<Icon
-						name="logo"
-						slot="icon"
-						class="text-foreground not-dark:invert"
-					/>
+				<HeaderLink href="/" astroPathname={pathname} client:load>
+					<IconLogo slot="icon" class="text-foreground not-dark:invert" />
 					<span class="hidden font-semibold xs:inline">{SITE_TITLE}</span>
 				</HeaderLink>
 			</h2>
 
 			<Group spacing="md">
 				<Group spacing="sm">
-					<HeaderLink href="/blog">Blog</HeaderLink>
-					<HeaderLink href="/about">About</HeaderLink>
+					<HeaderLink href="/blog" astroPathname={pathname} client:load>Blog</HeaderLink>
+					<HeaderLink href="/about" astroPathname={pathname} client:load>About</HeaderLink>
 				</Group>
 
 				<Group spacing="sm">
-					<ThemeToggle />
+					<ThemeToggle client:load/>
 					<a
 						aria-label="RSS Feed"
 						title="RSS Feed"
@@ -35,7 +34,7 @@ import ThemeToggle from "../theme-toggle/ThemeToggle.astro";
 						href="/rss.xml"
 						target="_blank"
 					>
-						<Icon name="lucide:rss" />
+						<IconRss />
 					</a>
 				</Group>
 			</Group>

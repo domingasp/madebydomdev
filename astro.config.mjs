@@ -5,13 +5,23 @@ import sitemap from "@astrojs/sitemap";
 import vue from "@astrojs/vue";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
-import icon from "astro-icon";
+import { FileSystemIconLoader } from "unplugin-icons/loaders";
+import Icons from "unplugin-icons/vite";
 
 // https://astro.build/config
 export default defineConfig({
+	integrations: [mdx(), sitemap(), vue()],
 	site: "https://madebydom.dev",
-	integrations: [mdx(), sitemap(), icon(), vue()],
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [
+			tailwindcss(),
+			Icons({
+				compiler: "vue3",
+				customCollections: {
+					custom: FileSystemIconLoader("./src/icons"),
+				},
+				scale: 1.4,
+			}),
+		],
 	},
 });

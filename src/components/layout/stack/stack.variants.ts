@@ -18,4 +18,9 @@ export const stack = tv({
 	},
 });
 
-export type StackVariants = VariantProps<typeof stack>;
+type Variants = VariantProps<typeof stack>;
+
+export type StackVariants = {
+	align?: Variants["align"];
+	spacing?: Variants["spacing"];
+};

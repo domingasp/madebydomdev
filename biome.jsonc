@@ -1,9 +1,18 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on",
+				"useSortedKeys": "on"
+			}
+		},
+		"enabled": true
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
 	},
 	"files": {
 		"ignoreUnknown": false
@@ -11,22 +20,6 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"nursery": {
-				"useVueDefineMacrosOrder": "warn",
-				"useSortedClasses": {
-					"level": "warn",
-					"options": {
-						"attributes": ["classList"],
-						"functions": ["tv"]
-					}
-				}
-			}
-		}
 	},
 	"html": {
 		"experimentalFullSupportEnabled": true
@@ -36,17 +29,20 @@
 			"quoteStyle": "double"
 		}
 	},
-	"assist": {
+	"linter": {
 		"enabled": true,
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
+		"rules": {
+			"nursery": {
+				"useSortedClasses": {
+					"level": "warn",
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["tv"]
+					}
+				},
+				"useVueDefineMacrosOrder": "warn"
+			},
+			"recommended": true
 		}
 	},
 	// A known limitation due to cross boundary usage
@@ -54,16 +50,25 @@
 	// https://next.biomejs.dev/internals/language-support/#linting-html-ish-languages
 	"overrides": [
 		{
+			"assist": { "actions": { "source": { "useSortedKeys": "off" } } },
+			"includes": [
+				"package.json",
+				"tsconfig.json",
+				"**/rss.xml.js",
+				".vscode/**"
+			]
+		},
+		{
 			"includes": ["**/*.astro", "**/*.vue"],
 			"linter": {
 				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					},
 					"style": {
 						"useConst": "off",
 						"useImportType": "off"
-					},
-					"correctness": {
-						"noUnusedVariables": "off",
-						"noUnusedImports": "off"
 					}
 				}
 			}
@@ -78,5 +83,10 @@
 				}
 			}
 		}
-	]
+	],
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }

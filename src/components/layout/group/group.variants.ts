@@ -4,10 +4,11 @@ import { spacing } from "../spacing.variants";
 export const group = tv({
 	base: "flex flex-row items-start",
 	defaultVariants: {
-		align: "start",
+		align: "center",
 		justify: "start",
 		spacing: "md",
 	},
+	extend: spacing,
 	variants: {
 		align: {
 			center: "items-center",
@@ -22,7 +23,6 @@ export const group = tv({
 			evenly: "justify-evenly",
 			start: "justify-start",
 		},
-		...spacing.variants,
 	},
 });
 

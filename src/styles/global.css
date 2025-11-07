@@ -99,11 +99,6 @@ body {
 	flex-direction: column;
 }
 
-[data-icon] {
-	width: 20px;
-	height: 20px;
-}
-
 header,
 main,
 footer {

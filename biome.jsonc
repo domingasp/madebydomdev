@@ -22,7 +22,7 @@
 					"level": "warn",
 					"options": {
 						"attributes": ["classList"],
-						"functions": ["cva", "cx"]
+						"functions": ["tv"]
 					}
 				}
 			}

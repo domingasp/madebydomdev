@@ -1,11 +1,10 @@
-import type { VariantProps } from "cva";
-import { cva } from "../../../../cva.config.ts";
+import { tv, type VariantProps } from "tailwind-variants";
 import { spacing } from "../spacing.variants";
 
-export const group = cva({
+export const group = tv({
 	base: "flex flex-row items-start",
 	defaultVariants: {
-		align: "center",
+		align: "start",
 		justify: "start",
 		spacing: "md",
 	},
@@ -27,4 +26,10 @@ export const group = cva({
 	},
 });
 
-export type GroupVariants = VariantProps<typeof group>;
+type Variants = VariantProps<typeof group>;
+
+export type GroupVariants = {
+	align?: Variants["align"];
+	justify?: Variants["justify"];
+	spacing?: Variants["spacing"];
+};

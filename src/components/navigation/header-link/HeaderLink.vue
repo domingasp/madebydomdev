@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import Group from '../../layout/group/Group.vue';
-import { headerLink } from './header-link.variants';
+import { type AnchorHTMLAttributes, computed } from 'vue';
+import { type HeaderLinkVariants, headerLink } from './header-link.variants';
 import { useActiveLink } from './useActiveLink.composable';
 
-const props = defineProps<{
-	href: string;
+interface Props extends /* @vue-ignore */ Omit<AnchorHTMLAttributes, "href" | "class">, HeaderLinkVariants {
+	href?: AnchorHTMLAttributes["href"]; // Otherwise href is on $attrs not props
+	class?: AnchorHTMLAttributes["class"];
 	// Server-side pathname injection - avoids CSS animation on page load
-	astroPathname: string;
-}>();
+	astroPathname: string
+}
 
-const { href, astroPathname } = props;
+const props = defineProps<Props>();
 
-const { isActive } = useActiveLink(href, astroPathname);
-const styles = computed(() => headerLink({ active: isActive.value }));
+const { isActive } = useActiveLink(props.href ?? "", props.astroPathname);
+const { base, line } = headerLink({ active: isActive.value });
 </script>
 
 <template>
-	<a :href="href" :class="styles.base()">
-		<Group spacing="sm" class="p-sm">
-			<slot name="icon" />
-			<div :class="styles.line()">
-				<slot />
-			</div>
-		</Group>
+	<a v-bind="$attrs" :href="href" :class="base({ class: props.class })">
+		<slot name="icon" />
+		<div :class="line()">
+			<slot />
+		</div>
 	</a>
 </template>

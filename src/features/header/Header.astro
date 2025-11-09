@@ -12,12 +12,10 @@ const pathname = Astro.url.pathname;
 <header transition:persist class="w-full">
 	<nav>
 		<Group justify="between" class="p-md">
-			<h2>
 				<HeaderLink href="/" astroPathname={pathname} client:load>
 					<IconLogo slot="icon" class="text-foreground not-dark:invert" />
-					<span class="hidden font-semibold xs:inline">{SITE_TITLE}</span>
+					<h2 class="hidden font-semibold xs:inline">{SITE_TITLE}</h2>
 				</HeaderLink>
-			</h2>
 
 			<Group spacing="md">
 				<Group spacing="sm">
@@ -26,16 +24,13 @@ const pathname = Astro.url.pathname;
 				</Group>
 
 				<Group spacing="sm">
-					<ThemeToggle client:load/>
-					<a
-						aria-label="RSS Feed"
+					<ThemeToggle/>
+					<HeaderLink href="/rss.xml" target="_blank" astroPathname={pathname} client:load 						aria-label="RSS Feed"
 						title="RSS Feed"
-						class="icon-button"
-						href="/rss.xml"
-						target="_blank"
-					>
-						<IconRss />
-					</a>
+						class="p-xs"
+>
+												<IconRss />
+					</HeaderLink>
 				</Group>
 			</Group>
 		</Group>

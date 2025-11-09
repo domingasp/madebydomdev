@@ -2,13 +2,24 @@
 import IconLaptop from "~icons/lucide/laptop";
 import IconMoon from "~icons/lucide/moon";
 import IconSun from "~icons/lucide/sun";
+import Button from "../../components/buttons/button/Button.vue";
+import { themeToggle } from "./theme-toggle.variants";
+
+/** Astro component as it requires ``<script is:inline />`` to prevent FOUC, Vue cannot do that */
+
+const {icon} = themeToggle();
 ---
 
-<button data-theme-toggle aria-label="Toggle Theme" title="Toggle Theme">
-  <IconMoon data-theme-icon="dark" class="icon hidden" />
-  <IconSun data-theme-icon="light" class="icon hidden" />
-  <IconLaptop data-theme-icon="system" class="icon hidden" />
-</button>
+<Button data-theme-toggle aria-label="Toggle Theme" title="Toggle Theme"
+	variant="transparent"
+>
+	<!-- Spacer element -->
+	<IconMoon class="opacity-0 pointer-events-none" />
+
+  <IconMoon data-theme-icon="dark" class={icon()} />
+  <IconSun data-theme-icon="light" class={icon()} />
+  <IconLaptop data-theme-icon="system" class={icon()} />
+</Button>
 
 <!-- Prevent FOUC for theme icons -->
 <script is:inline>
@@ -68,17 +79,26 @@ import IconSun from "~icons/lucide/sun";
 
   /** Switch, with animation, the theme icon based on the theme */
   function switchThemeIcon(theme: Themes) {
-    getThemeIcons().forEach((icon) => {
-      if (icon.getAttribute("data-theme-icon") === theme) {
-        icon.classList.remove("hidden");
-        icon.classList.add("animate-slide-in-from-left");
-        icon.classList.remove("animate-slide-out-to-right");
-      } else {
-        icon.classList.add("animate-slide-out-to-right");
-        icon.classList.remove("animate-slide-in-from-left");
-        setTimeout(() => icon.classList.add("hidden"), 300);
-      }
-    });
+		getThemeIcons().forEach((icon) => {
+			icon.classList.remove(
+				"animate-slide-in-from-left",
+				"animate-slide-out-to-right"
+			);
+
+			if (icon.getAttribute("data-theme-icon") === theme) {
+				icon.classList.remove("hidden");
+				icon.classList.add("animate-slide-in-from-left");
+			} else if (!icon.classList.contains("hidden")) {
+				icon.classList.add("animate-slide-out-to-right");
+
+				const handleAnimationEnd = () => {
+					icon.classList.add("hidden");
+					icon.classList.remove("animate-slide-out-to-right");
+					icon.removeEventListener("animationend", handleAnimationEnd);
+				}
+				icon.addEventListener("animationend", handleAnimationEnd);
+			}
+		});
   }
 
   /** Find and apply next theme */
@@ -151,25 +171,7 @@ import IconSun from "~icons/lucide/sun";
       opacity: 0;
     }
   }
-
-  button[data-theme-toggle] {
-    @apply transition-all;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 27px;
-    height: 27px;
-  }
-
-  .icon {
-    position: absolute;
-  }
-
-  .icon:not(.hidden) {
-    display: inline-block;
-  }
-
+	
   .animate-slide-in-from-left {
     animation: slide-in-from-left 0.2s ease-in forwards;
   }

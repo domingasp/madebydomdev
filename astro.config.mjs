@@ -20,6 +20,8 @@ export default defineConfig({
 				customCollections: {
 					custom: FileSystemIconLoader("./src/icons"),
 				},
+				/* Fix vertical align in Safari and shifting during animation */
+				defaultClass: "transform-gpu",
 				scale: 1.4,
 			}),
 		],

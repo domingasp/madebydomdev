@@ -19,6 +19,11 @@
 }
 
 @theme {
+	/* Override default transition-colors, replace outline-color with outline */
+	--transition-property-colors:
+		color, background-color, border-color, text-decoration-color, fill, stroke,
+		--tw-gradient-from, --tw-gradient-via, --tw-gradient-to, outline;
+
 	--font-sans: "Inter", sans-serif;
 
 	--breakpoint-xs: 30rem;
@@ -37,6 +42,8 @@
 	--padding-2xl: calc(var(--spacing) * 6);
 	--padding-3xl: calc(var(--spacing) * 7);
 	--padding-4xl: calc(var(--spacing) * 8);
+
+	--color-focus: var(--color-blue-500);
 
 	--color-background: var(--color-neutral-100);
 
@@ -61,6 +68,8 @@
 
 @layer themes {
 	[data-theme="dark"] {
+		--color-focus: var(--color-blue-400);
+
 		--color-background: var(--color-neutral-800);
 
 		--color-foreground: var(--color-neutral-100);
@@ -79,6 +88,12 @@
 		--color-fill-inverse-active: oklch(
 			from var(--color-fill-inverse) calc(l + 0.06) c h
 		);
+	}
+}
+
+@layer base {
+	*:focus-visible {
+		@apply z-50 outline-2 outline-focus;
 	}
 }
 
@@ -133,9 +148,4 @@ main {
 		--os-padding-perpendicular: 2px;
 		--os-padding-axis: 4px;
 	}
-}
-
-button,
-.icon-button {
-	@apply rounded-md p-xs transition-all hover:bg-surface-hover hover:shadow-md active:bg-surface-active;
 }

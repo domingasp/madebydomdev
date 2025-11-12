@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { type StackVariants, stack } from './stack.variants';
+import { type StackVariants, stack } from "./stack.variants";
 
-const props = withDefaults(
-	defineProps<StackVariants & {
-		class?: string;
-	}>(),
-	{
-		...stack.defaultVariants,
-		class: "",
-	},
-);
+interface Props extends StackVariants {
+	class?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	...stack.defaultVariants,
+	class: "",
+});
 </script>
 
 <template>

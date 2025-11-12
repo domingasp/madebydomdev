@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { type GroupVariants, group } from "./group.variants";
 
-const props = withDefaults(
-	defineProps<GroupVariants & {
-		class?: string;
-	}>(),
-	{
-		...group.defaultVariants,
-		class: "",
-	},
-);
+interface Props extends GroupVariants {
+	class?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	...group.defaultVariants,
+	class: "",
+});
 </script>
 
 <template>

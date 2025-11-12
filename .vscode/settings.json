@@ -4,5 +4,14 @@
 	"git.inputValidationLength": 72,
 	"css.customData": [".vscode/tailwind.json"],
 	"tailwindCSS.classFunctions": ["tv"],
-	"tailwindCSS.rootFontSize": 14
+	"tailwindCSS.rootFontSize": 14,
+	"eslint.validate": [
+		"vue",
+		"astro",
+		"md",
+		"mdx",
+		"css",
+		"typescript",
+		"javascript"
+	]
 }

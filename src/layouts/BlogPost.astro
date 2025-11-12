@@ -9,49 +9,49 @@ import Header from "../features/header/Header.astro";
 type Props = CollectionEntry<"blog">["data"] & { slug?: string };
 
 const { title, description, pubDate, updatedDate, heroImage, slug } =
-  Astro.props;
+	Astro.props;
 ---
 
 <html lang="en">
-  <head data-overlayscrollbars-initialize>
-    <BaseHead title={title} description={description} />
-  </head>
+	<head data-overlayscrollbars-initialize>
+		<BaseHead title={title} description={description} />
+	</head>
 
-  <body data-overlayscrollbars-initialize>
-    <Header />
-    <main>
-      <article>
-        <div class="hero-image">
-          {
-            heroImage && (
-              <Image
-                src={heroImage}
-                alt=""
-                transition:name={`${slug} hero`}
-                class="h-auto w-full"
-              />
-            )
-          }
-        </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date" transition:name={`${slug} pubDate`}>
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1 transition:name={`${slug} title`}>{title}</h1>
-            <hr />
-          </div>
-          <slot />
-        </div>
-      </article>
-    </main>
-    <Footer />
-  </body>
+	<body data-overlayscrollbars-initialize>
+		<Header />
+		<main>
+			<article>
+				<div>
+					{
+						heroImage && (
+							<Image
+								src={heroImage}
+								alt=""
+								transition:name={`${slug} hero`}
+								class="h-auto w-full"
+							/>
+						)
+					}
+				</div>
+				<div>
+					<div>
+						<div transition:name={`${slug} pubDate`}>
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div>
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1 transition:name={`${slug} title`}>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
 </html>

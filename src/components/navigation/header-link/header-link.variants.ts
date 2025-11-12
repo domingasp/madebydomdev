@@ -5,7 +5,7 @@ export const headerLink = tv({
 		base: "group flex items-center gap-sm rounded-md p-sm transition-colors",
 		line: [
 			"relative",
-			"after:-z-1 after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:content-['']",
+			"after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-1 after:w-full after:content-['']",
 			"after:bg-linear-to-r after:from-[#FF0F7B] after:to-[#F89B29]",
 			"after:transition-transform after:duration-250",
 			"after:origin-bottom-right after:scale-x-0",

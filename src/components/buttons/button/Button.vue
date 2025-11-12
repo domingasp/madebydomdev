@@ -2,10 +2,15 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from "vue";
 import { type ButtonVariants, button } from "./button.variants";
 
-interface Props extends /* @vue-ignore */ Omit<ButtonHTMLAttributes, "class">, ButtonVariants { class?: HTMLAttributes["class"] }
+interface Props
+	extends /* @vue-ignore */ Omit<ButtonHTMLAttributes, "class">,
+		ButtonVariants {
+	class?: HTMLAttributes["class"];
+}
 
 const props = withDefaults(defineProps<Props>(), {
 	...button.defaultVariants,
+	class: undefined,
 });
 </script>
 

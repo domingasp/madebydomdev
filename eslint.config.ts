@@ -10,6 +10,7 @@ import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
 import { tailwind4 } from "tailwind-csstree";
+import importPlugin from "eslint-plugin-import";
 
 export default defineConfig([
 	{ ignores: ["dist/**", "node_modules/**", ".astro/**"] },
@@ -20,6 +21,41 @@ export default defineConfig([
 		languageOptions: { globals: globals.browser },
 	},
 	tseslint.configs.recommended,
+
+	// #region Import restrictions
+	{
+		plugins: { import: importPlugin },
+		rules: {
+			"import/no-restricted-paths": [
+				"error",
+				{
+					zones: [
+						// Cross-feature restrictions
+						{
+							target: "./src/features/footer",
+							from: "./src/features",
+							except: ["./footer"],
+						},
+						{
+							target: "./src/features/header",
+							from: "./src/features",
+							except: ["./header"],
+						},
+						// Unidirectional codebase
+						{
+							target: "./src/features",
+							from: ["./src/pages", "./src/content"],
+						},
+						{
+							target: ["./src/components"],
+							from: ["./src/features", "./src/pages", "./src/content"],
+						},
+					],
+				},
+			],
+		},
+	},
+	// #endregion Import restrictions
 
 	// #region Astro
 	{

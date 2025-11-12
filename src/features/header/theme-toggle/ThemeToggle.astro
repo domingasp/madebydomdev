@@ -2,8 +2,8 @@
 import IconLaptop from "~icons/lucide/laptop";
 import IconMoon from "~icons/lucide/moon";
 import IconSun from "~icons/lucide/sun";
-import Button from "../../components/buttons/button/Button.vue";
 import { themeToggle } from "./theme-toggle.variants";
+import Button from "../../../components/buttons/button/Button.vue";
 
 /** Astro component as it requires `<script is:inline />` to prevent FOUC, Vue cannot do that */
 
@@ -151,7 +151,7 @@ const { icon } = themeToggle();
 </script>
 
 <style>
-	@reference "../../styles/global.css";
+	@reference "../../../styles/global.css";
 
 	@keyframes slide-in-from-left {
 		from {

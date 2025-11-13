@@ -11,6 +11,7 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
 import { tailwind4 } from "tailwind-csstree";
 import importPlugin from "eslint-plugin-import";
+import checkFile from "eslint-plugin-check-file";
 
 export default defineConfig([
 	{ ignores: ["dist/**", "node_modules/**", ".astro/**"] },
@@ -21,6 +22,20 @@ export default defineConfig([
 		languageOptions: { globals: globals.browser },
 	},
 	tseslint.configs.recommended,
+
+	// #region Only `mdx` for blog posts
+	{
+		plugins: { "check-file": checkFile },
+		rules: {
+			"check-file/filename-naming-convention": [
+				"error",
+				{
+					"./src/content/blog/**/*.!(mdx)": "*.mdx",
+				},
+			],
+		},
+	},
+	// #endregion Only `mdx` for blog posts
 
 	// #region Import restrictions
 	{

@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import Heading from "../../components/typography/Heading/Heading.vue";
+import { h } from "vue";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -16,5 +18,14 @@ const { Content } = await render(post);
 ---
 
 <BlogPost {...post.data} slug={post.id}>
-	<Content />
+	<Content
+		components={{
+			h1: h(Heading, { level: 1 }),
+			h2: h(Heading, { level: 2 }),
+			h3: h(Heading, { level: 3 }),
+			h4: h(Heading, { level: 4 }),
+			h5: h(Heading, { level: 5 }),
+			h6: h(Heading, { level: 6 }),
+		}}
+	/>
 </BlogPost>

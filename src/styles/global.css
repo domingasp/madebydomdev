@@ -18,6 +18,22 @@
 	font-style: italic;
 }
 
+@font-face {
+	font-family: "JetBrains Mono", monospace;
+	src: url("/fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+	font-weight: 100 800;
+	font-optical-sizing: auto;
+}
+
+@font-face {
+	font-family: "JetBrains Mono", monospace;
+	src: url("/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf")
+		format("truetype");
+	font-weight: 100 800;
+	font-style: italic;
+	font-optical-sizing: auto;
+}
+
 @theme {
 	/* Override default transition-colors, replace outline-color with outline */
 	--transition-property-colors: color, background-color, border-color,
@@ -25,6 +41,7 @@
 		--tw-gradient-to, outline;
 
 	--font-sans: "Inter", sans-serif;
+	--default-mono-font-family: "JetBrains Mono", monospace;
 
 	--breakpoint-xs: 30rem;
 
@@ -44,6 +61,7 @@
 	--padding-4xl: calc(var(--spacing) * 8);
 
 	--color-focus: var(--color-blue-500);
+	--color-highlight: var(--color-yellow-300);
 
 	--color-background: var(--color-neutral-100);
 
@@ -53,9 +71,15 @@
 		from var(--color-foreground) calc(l + 0.25) c h
 	);
 
+	--color-foreground-secondary: oklch(
+		from var(--color-foreground) calc(l + 0.25) c h
+	);
+
 	--color-surface: var(--color-white);
 	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
 	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
+
+	--color-surface-secondary: var(--color-neutral-200);
 
 	--color-fill-inverse: var(--color-neutral-800);
 	--color-fill-inverse-hover: oklch(
@@ -69,6 +93,7 @@
 @layer themes {
 	[data-theme="dark"] {
 		--color-focus: var(--color-blue-400);
+		--color-highlight: var(--color-yellow-400);
 
 		--color-background: var(--color-neutral-800);
 
@@ -78,8 +103,16 @@
 			from var(--color-foreground) calc(l - 0.25) c h
 		);
 
-		--color-surface: var(--color-neutral-800);
+		--color-foreground-secondary: oklch(
+			from var(--color-foreground) calc(l - 0.25) c h
+		);
+
+		--color-surface: oklch(from var(--color-neutral-800) calc(l + 0.05) c h);
 		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
+
+		--color-surface-secondary: oklch(
+			from var(--color-surface) calc(l + 0.05) c h
+		);
 
 		--color-fill-inverse: var(--color-neutral-100);
 		--color-fill-inverse-hover: oklch(
@@ -93,40 +126,178 @@
 
 @layer base {
 	*:focus-visible {
-		@apply z-50 outline-2 outline-focus;
+		@apply z-50 outline-2 outline-focus rounded-sm;
 	}
-}
 
-::selection {
-	background-color: #f89b29;
-}
+	::selection {
+		background-color: #f89b29;
+	}
 
-html {
-	font-size: 14px;
-}
+	html {
+		font-size: 14px;
+	}
 
-body {
-	background-color: var(--color-background);
-	color: var(--color-foreground);
+	body {
+		background-color: var(--color-background);
+		color: var(--color-foreground);
 
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
+		display: flex;
+		min-height: 100vh;
+		flex-direction: column;
+	}
 
-header,
-main,
-footer {
-	@apply mx-auto max-w-screen-sm;
-}
+	header,
+	main,
+	footer {
+		@apply mx-auto max-w-screen-sm w-full;
+	}
 
-body {
-	@apply overflow-hidden;
-}
+	body {
+		@apply overflow-hidden;
+	}
 
-main {
-	@apply px-md;
-	flex: 1;
+	main {
+		@apply px-md;
+		flex: 1;
+	}
+
+	blockquote {
+		@apply px-xl py-md mt-4 mx-4 rounded-lg;
+		position: relative;
+		overflow: hidden;
+	}
+
+	blockquote::before {
+		@apply bg-foreground-secondary rounded-lg w-1.25;
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	blockquote cite {
+		@apply block italic text-foreground-secondary mt-3 text-sm;
+	}
+
+	blockquote p:first-child {
+		@apply m-0;
+	}
+
+	cite a {
+		@apply text-focus p-xs;
+	}
+
+	img {
+		@apply rounded-lg;
+	}
+
+	p {
+		@apply mt-4;
+	}
+
+	ul,
+	ol {
+		@apply mt-2 pl-5;
+	}
+
+	ul {
+		list-style-type: disc;
+	}
+
+	ul ul {
+		list-style-type: circle;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	li {
+		@apply mt-2;
+	}
+
+	li:first-child {
+		@apply mt-0;
+	}
+
+	mark {
+		@apply px-0.25 bg-highlight;
+	}
+
+	section[data-footnotes] {
+		@apply text-xs;
+	}
+
+	a {
+		@apply text-focus hover:underline;
+	}
+
+	hr {
+		@apply border-foreground-secondary;
+	}
+
+	pre {
+		@apply px-lg py-md rounded-lg mt-4;
+	}
+
+	abbr {
+		@apply italic;
+	}
+
+	table {
+		@apply w-full mt-4 border-spacing-0 border-separate rounded-lg overflow-hidden;
+	}
+
+	/* Header & footer */
+	thead,
+	tfoot {
+		@apply bg-surface-secondary;
+	}
+
+	/* All cells */
+	th,
+	td {
+		@apply p-sm text-left;
+	}
+
+	/* Header cells */
+	th {
+		@apply border-background border-b-surface-secondary border-b border-r;
+	}
+
+	th:first-child {
+		@apply border-l-background;
+	}
+
+	th:last-child {
+		@apply border-r-surface-secondary;
+	}
+
+	/* Body cells */
+	td {
+		@apply bg-surface border-background border-b border-r;
+	}
+
+	td:first-child {
+		@apply border-l border-l-surface-secondary;
+	}
+
+	td:last-child {
+		@apply border-r border-r-surface-secondary;
+	}
+
+	tr:last-child td {
+		@apply border-b-surface-secondary;
+	}
+
+	tr:last-child td:first-child {
+		@apply rounded-bl-lg;
+	}
+
+	tr:last-child td:last-child {
+		@apply rounded-br-lg;
+	}
 }
 
 /* overlayscrollbars theme */

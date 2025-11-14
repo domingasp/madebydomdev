@@ -21,7 +21,7 @@ const posts = (await getCollection("blog")).sort(
 		<Header />
 		<main>
 			<section>
-				<ul>
+				<ul class="mt-0 list-none p-0">
 					{
 						posts.map((post) => (
 							<li>

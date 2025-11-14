@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const headerLink = tv({
 	slots: {
-		base: "group flex items-center gap-sm rounded-md p-sm transition-colors",
+		base: "group flex items-center gap-sm rounded-md p-sm text-foreground no-underline transition-colors",
 		line: [
 			"relative",
 			"after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-1 after:w-full after:content-['']",

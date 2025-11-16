@@ -1,17 +1,20 @@
+import css from "@eslint/css";
 import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import astroParser from "astro-eslint-parser";
-import pluginVue from "eslint-plugin-vue";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
-import css from "@eslint/css";
-import { defineConfig } from "eslint/config";
+import astroParser from "astro-eslint-parser";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
-import { tailwind4 } from "tailwind-csstree";
-import importPlugin from "eslint-plugin-import";
 import checkFile from "eslint-plugin-check-file";
+import importPlugin from "eslint-plugin-import";
+import perfectionist from "eslint-plugin-perfectionist";
+import pluginVue from "eslint-plugin-vue";
+import { defineConfig } from "eslint/config";
+import globals from "globals";
+import { tailwind4 } from "tailwind-csstree";
+import tseslint from "typescript-eslint";
+
+import eslintPluginMadebydomdev from "./eslint-plugin-madebydomdev/index.ts";
 
 export default defineConfig([
 	{ ignores: ["dist/**", "node_modules/**", ".astro/**"] },
@@ -157,6 +160,83 @@ export default defineConfig([
 		extends: ["markdown/recommended"],
 	},
 	// #endregion Other file types
+
+	// #region Perfectionist
+	{
+		plugins: { perfectionist },
+		rules: {
+			"perfectionist/sort-imports": [
+				"error",
+				{
+					type: "alphabetical",
+					order: "asc",
+					ignoreCase: true,
+					newlinesBetween: 1,
+					groups: [
+						"type",
+						"builtin",
+						"vue",
+						"external",
+						"internal",
+						"parent",
+						"sibling",
+						"index",
+						"object",
+					],
+					customGroups: [
+						{
+							groupName: "vue",
+							elementNamePattern: ["^vue$", "^@vue/.+", "^vue-.+"],
+						},
+					],
+				},
+			],
+		},
+	},
+	// #endregion Perfectionist
+
+	// #region Storybook
+	{
+		plugins: { perfectionist },
+		files: ["**/*.stories.ts"],
+		rules: {
+			"perfectionist/sort-objects": [
+				"error",
+				{
+					groups: [
+						"title",
+						"component",
+						"globals",
+						"parameters",
+						"argTypes",
+						"args",
+					],
+					customGroups: {
+						title: "^title$",
+						component: "^component$",
+						globals: "^globals$",
+						parameters: "^parameters$",
+						argTypes: "^argTypes$",
+						args: "^args$",
+					},
+					// Allow any order within args and argTypes
+					ignorePattern: "args|argTypes",
+				},
+			],
+		},
+	},
+	// #endregion Storybook
+
+	// #region Custom rules
+	{
+		plugins: {
+			madebydomdev: eslintPluginMadebydomdev,
+		},
+		rules: {
+			"madebydomdev/no-default-variants": "error",
+		},
+	},
+	// #endregion Custom rules
 
 	// Prettier last to override other configs
 	eslintConfigPrettier,

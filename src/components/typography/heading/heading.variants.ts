@@ -2,9 +2,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const heading = tv({
 	base: "mt-[1em] font-bold text-foreground",
-	defaultVariants: {
-		level: 3,
-	},
 	variants: {
 		level: {
 			1: "text-4xl",
@@ -17,8 +14,4 @@ export const heading = tv({
 	},
 });
 
-type Variants = VariantProps<typeof heading>;
-
-export type HeadingVariants = {
-	level?: Variants["level"];
-};
+export type HeadingVariants = VariantProps<typeof heading>;

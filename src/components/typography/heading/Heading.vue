@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
 import { heading, type HeadingVariants } from "./heading.variants";
 
-interface Props extends HeadingVariants {
-	class?: HTMLAttributes["class"];
+interface Props {
+	/**
+	 * Heading level from 1 to 6
+	 */
+	level?: HeadingVariants["level"];
+	class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	...heading.defaultVariants,
+	level: 3,
 	class: undefined,
 });
 

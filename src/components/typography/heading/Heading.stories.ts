@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
+import { getVariantOptions } from "../../../lib/variants";
+
+import { heading, type HeadingVariants } from "./heading.variants";
 import Heading from "./Heading.vue";
 
 // TODO render variants component
-// TODO get levels from variant type definition
 
-const levels = [1, 2, 3, 4, 5, 6] as const;
+const levels = getVariantOptions<HeadingVariants>(heading)("level");
 
 const meta = {
 	title: "Typography/Heading",

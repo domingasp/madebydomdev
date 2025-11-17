@@ -15,6 +15,7 @@ const config: StorybookConfig = {
 	stories: ["../src/**/*.stories.ts"],
 	async viteFinal(config) {
 		config.plugins = config.plugins || [];
+		// Must be first for `vue-component-meta` to work correctly
 		config.plugins.unshift(vue());
 		config.plugins.push(tailwindcss());
 		return config;

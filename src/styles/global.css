@@ -1,142 +1,6 @@
-@import "tailwindcss";
-
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
-@font-face {
-	font-family: "Inter";
-	src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
-	font-weight: 100 900;
-	font-stretch: 75% 125%;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
-	font-weight: 100 900;
-	font-stretch: 75% 125%;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: "JetBrains Mono", monospace;
-	src: url("/fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
-	font-weight: 100 800;
-	font-optical-sizing: auto;
-}
-
-@font-face {
-	font-family: "JetBrains Mono", monospace;
-	src: url("/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf")
-		format("truetype");
-	font-weight: 100 800;
-	font-style: italic;
-	font-optical-sizing: auto;
-}
-
-@theme {
-	/* Override default transition-colors, replace outline-color with outline */
-	--transition-property-colors: color, background-color, border-color,
-		text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via,
-		--tw-gradient-to, outline;
-
-	--font-sans: "Inter", sans-serif;
-	--default-mono-font-family: "JetBrains Mono", monospace;
-
-	--breakpoint-xs: 30rem;
-
-	--gap-xs: var(--spacing);
-	--gap-sm: calc(var(--spacing) * 2);
-	--gap-md: calc(var(--spacing) * 4);
-	--gap-lg: calc(var(--spacing) * 6);
-
-	--padding-xs: calc(var(--spacing) * 1);
-	--padding-sm: calc(var(--spacing) * 2);
-	--padding-sm-md: calc(var(--spacing) * 2.5);
-	--padding-md: calc(var(--spacing) * 3);
-	--padding-lg: calc(var(--spacing) * 4);
-	--padding-xl: calc(var(--spacing) * 5);
-	--padding-2xl: calc(var(--spacing) * 6);
-	--padding-3xl: calc(var(--spacing) * 7);
-	--padding-4xl: calc(var(--spacing) * 8);
-
-	--color-focus: var(--color-blue-500);
-	--color-highlight: var(--color-yellow-300);
-
-	--color-background: var(--color-neutral-100);
-
-	--color-foreground: var(--color-neutral-800);
-
-	--color-foreground-secondary: oklch(
-		from var(--color-foreground) calc(l + 0.25) c h
-	);
-
-	--color-foreground-secondary: oklch(
-		from var(--color-foreground) calc(l + 0.25) c h
-	);
-
-	--color-surface: var(--color-white);
-	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
-	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
-
-	--color-surface-secondary: var(--color-neutral-200);
-
-	--color-fill-inverse: var(--color-neutral-800);
-	--color-fill-inverse-hover: oklch(
-		from var(--color-fill-inverse) calc(l + 0.08) c h
-	);
-	--color-fill-inverse-active: oklch(
-		from var(--color-fill-inverse) calc(l + 0.16) c h
-	);
-}
-
-@layer themes {
-	[data-theme="dark"] {
-		--color-focus: var(--color-blue-400);
-		--color-highlight: var(--color-yellow-400);
-
-		--color-background: var(--color-neutral-800);
-
-		--color-foreground: var(--color-neutral-100);
-
-		--color-foreground-secondary: oklch(
-			from var(--color-foreground) calc(l - 0.25) c h
-		);
-
-		--color-foreground-secondary: oklch(
-			from var(--color-foreground) calc(l - 0.25) c h
-		);
-
-		--color-surface: oklch(from var(--color-neutral-800) calc(l + 0.05) c h);
-		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
-
-		--color-surface-secondary: oklch(
-			from var(--color-surface) calc(l + 0.05) c h
-		);
-
-		--color-fill-inverse: var(--color-neutral-100);
-		--color-fill-inverse-hover: oklch(
-			from var(--color-fill-inverse) calc(l - 0.03) c h
-		);
-		--color-fill-inverse-active: oklch(
-			from var(--color-fill-inverse) calc(l + 0.06) c h
-		);
-	}
-}
+@reference "./theme.css";
 
 @layer base {
-	*:focus-visible {
-		@apply z-50 outline-2 outline-focus rounded-sm;
-	}
-
-	::selection {
-		background-color: #f89b29;
-	}
-
-	html {
-		font-size: 14px;
-	}
-
 	body {
 		background-color: var(--color-background);
 		color: var(--color-foreground);
@@ -168,7 +32,9 @@
 	}
 
 	blockquote::before {
-		@apply bg-foreground-secondary rounded-lg w-1.25;
+		@apply bg-foreground-secondary rounded-lg;
+		/* Eslint doesn't support w-1.25 */
+		width: calc(var(--spacing, 0.25rem) * 1.25);
 		content: "";
 		position: absolute;
 		left: 0;
@@ -222,7 +88,9 @@
 	}
 
 	mark {
-		@apply px-0.25 bg-highlight;
+		@apply bg-highlight;
+		/* Eslint doesn't support px-0.25 */
+		padding-inline: calc(var(--spacing, 0.25rem) * 0.25);
 	}
 
 	section[data-footnotes] {
@@ -297,26 +165,5 @@
 
 	tr:last-child td:last-child {
 		@apply rounded-br-lg;
-	}
-}
-
-/* overlayscrollbars theme */
-.os-theme-madebydomdev {
-	--os-size: 22px;
-	--os-padding-perpendicular: 8px;
-	--os-padding-axis: 8px;
-	--os-track-border-radius: 10px;
-	--os-handle-interactive-area-offset: 4px;
-	--os-handle-border-radius: 10px;
-	--os-handle-bg: var(--color-fill-inverse);
-	--os-handle-bg-hover: var(--color-fill-inverse-hover);
-	--os-handle-bg-active: var(--color-fill-inverse-active);
-}
-
-@media (width < 580px) {
-	.os-theme-madebydomdev {
-		--os-size: 10px;
-		--os-padding-perpendicular: 2px;
-		--os-padding-axis: 4px;
 	}
 }

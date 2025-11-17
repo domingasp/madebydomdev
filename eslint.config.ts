@@ -114,7 +114,7 @@ export default defineConfig([
 		},
 		// Until tailwind-csstree supports @custom-variant
 		// https://github.com/humanwhocodes/tailwind-csstree/issues/2
-		ignores: ["./src/styles/global.css"],
+		ignores: ["./src/styles/theme.css"],
 	},
 	{
 		files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue,astro}"],
@@ -128,7 +128,7 @@ export default defineConfig([
 		},
 		settings: {
 			"better-tailwindcss": {
-				entryPoint: "src/styles/global.css",
+				entryPoint: "src/styles/theme.css",
 			},
 		},
 	},

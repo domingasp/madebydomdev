@@ -4,10 +4,6 @@ import { spacing } from "../spacing.variants";
 
 export const stack = tv({
 	base: "flex flex-col",
-	defaultVariants: {
-		align: "start",
-		spacing: "md",
-	},
 	extend: spacing,
 	variants: {
 		align: {
@@ -18,9 +14,4 @@ export const stack = tv({
 	},
 });
 
-type Variants = VariantProps<typeof stack>;
-
-export type StackVariants = {
-	align?: Variants["align"];
-	spacing?: Variants["spacing"];
-};
+export type StackVariants = VariantProps<typeof stack>;

@@ -16,9 +16,9 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+	class: undefined,
 	cols: 2,
 	spacing: "md",
-	class: undefined,
 });
 
 const gridColumns = computed(() =>

@@ -20,7 +20,7 @@ export const RenderVariantsFactory = {
 							restProps: props.restProps,
 							variants: props.variants,
 						},
-						props.restProps.default
+						() => props.restProps.default
 					);
 			},
 			{

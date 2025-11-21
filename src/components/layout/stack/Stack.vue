@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { type StackVariants, stack } from "./stack.variants";
 
-interface Props extends StackVariants {
+interface Props {
+	/**
+	 * Alignment of items along the cross axis
+	 */
+	align?: StackVariants["align"];
+	/**
+	 * Spacing between items
+	 */
+	spacing?: StackVariants["spacing"];
 	class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	...stack.defaultVariants,
-	class: "",
+	align: "start",
+	class: undefined,
+	spacing: "md",
 });
 </script>
 

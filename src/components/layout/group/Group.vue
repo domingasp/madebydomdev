@@ -1,13 +1,27 @@
 <script setup lang="ts">
 import { type GroupVariants, group } from "./group.variants";
 
-interface Props extends GroupVariants {
+interface Props {
+	/**
+	 * Alignment of items along the cross axis
+	 */
+	align?: GroupVariants["align"];
+	/**
+	 * Justification of items along the main axis
+	 */
+	justify?: GroupVariants["justify"];
+	/**
+	 * Spacing between items
+	 */
+	spacing?: GroupVariants["spacing"];
 	class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	...group.defaultVariants,
-	class: "",
+	align: "center",
+	class: undefined,
+	justify: "start",
+	spacing: "md",
 });
 </script>
 

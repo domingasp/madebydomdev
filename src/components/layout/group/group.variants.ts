@@ -1,13 +1,9 @@
 import { tv, type VariantProps } from "tailwind-variants";
+
 import { spacing } from "../spacing.variants";
 
 export const group = tv({
 	base: "flex flex-row items-start",
-	defaultVariants: {
-		align: "center",
-		justify: "start",
-		spacing: "md",
-	},
 	extend: spacing,
 	variants: {
 		align: {
@@ -26,10 +22,4 @@ export const group = tv({
 	},
 });
 
-type Variants = VariantProps<typeof group>;
-
-export type GroupVariants = {
-	align?: Variants["align"];
-	justify?: Variants["justify"];
-	spacing?: Variants["spacing"];
-};
+export type GroupVariants = VariantProps<typeof group>;

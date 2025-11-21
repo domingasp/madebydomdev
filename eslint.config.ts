@@ -191,6 +191,23 @@ export default defineConfig([
 					],
 				},
 			],
+			"perfectionist/sort-objects": [
+				"error",
+				{
+					type: "alphabetical",
+					order: "asc",
+					ignoreCase: true,
+					partitionByNewLine: true,
+				},
+			],
+			"perfectionist/sort-exports": [
+				"error",
+				{
+					type: "alphabetical",
+					order: "asc",
+					ignoreCase: true,
+				},
+			],
 		},
 	},
 	// #endregion Perfectionist

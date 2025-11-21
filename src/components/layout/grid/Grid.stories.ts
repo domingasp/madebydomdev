@@ -19,7 +19,7 @@ const meta = {
 		setup() {
 			return { args };
 		},
-		template: `
+		template: /*html*/ `
       <Grid v-bind="args">
         <div v-for="i in 6" :key="i" class="h-12 min-w-12 rounded-md bg-foreground" />
       </Grid>

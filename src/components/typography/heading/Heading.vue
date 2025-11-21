@@ -10,8 +10,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	level: 3,
 	class: undefined,
+	level: 3,
 });
 
 const tag = `h${props.level}`;

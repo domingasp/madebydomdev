@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import { faker } from "@faker-js/faker";
 
-import { RenderVariants } from "../../../../.storybook/utils/create-render-variants";
+import { RenderVariantsFactory } from "../../../../.storybook/components/RenderVariantsFactory";
 import { getVariantOptions } from "../../../lib/variants";
 
 import { text, type TextVariants } from "./text.variants";
 import Text from "./Text.vue";
 
-const TextVariants = RenderVariants.for(Text)();
+const TextVariants = RenderVariantsFactory.for(Text);
 const colors = getVariantOptions<TextVariants>(text)("color");
 const sizes = getVariantOptions<TextVariants>(text)("size");
 
@@ -42,7 +42,7 @@ export const Sizes: Story = {
 		setup() {
 			return { args, sizes };
 		},
-		template: `<TextVariants prop="size" :variants="sizes" :restProps="args"/>`,
+		template: /*html*/ `<TextVariants prop="size" :variants="sizes" :restProps="args"/>`,
 	}),
 };
 
@@ -53,7 +53,7 @@ export const Colors: Story = {
 		setup() {
 			return { args, colors };
 		},
-		template: `<TextVariants prop="color" :variants="colors" :restProps="args"/>`,
+		template: /*html*/ `<TextVariants prop="color" :variants="colors" :restProps="args"/>`,
 	}),
 };
 
@@ -68,6 +68,6 @@ export const Nested: Story = {
 	parameters: { controls: { disable: true } },
 	render: () => ({
 		components: { Text },
-		template: `<Text><Text bold="true">Hello</Text> World!</Text>`,
+		template: /*html*/ `<Text><Text bold="true">Hello</Text> World!</Text>`,
 	}),
 };

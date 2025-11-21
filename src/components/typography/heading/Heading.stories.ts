@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
+import { RenderVariantsFactory } from "../../../../.storybook/components/RenderVariantsFactory";
 import { getVariantOptions } from "../../../lib/variants";
 
 import { heading, type HeadingVariants } from "./heading.variants";
 import Heading from "./Heading.vue";
 
-// TODO render variants component
-
+const HeadingVariants = RenderVariantsFactory.for(Heading);
 const levels = getVariantOptions<HeadingVariants>(heading)("level");
 
 const meta = {
@@ -29,3 +29,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Levels: Story = {
+	parameters: { controls: { disable: true } },
+	render: (args) => ({
+		components: { Heading, HeadingVariants },
+		setup() {
+			return { args, levels };
+		},
+		template: /*html*/ `<HeadingVariants prop="level" :variants="levels" :restProps="args" orientation="vertical" />`,
+	}),
+};

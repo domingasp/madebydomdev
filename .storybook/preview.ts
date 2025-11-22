@@ -4,7 +4,6 @@ import "../src/styles/theme.css";
 import "../src/styles/base.css";
 
 const preview: Preview = {
-	tags: ["autodocs"],
 	parameters: {
 		controls: {
 			disableSaveFromUI: true,
@@ -22,6 +21,7 @@ const preview: Preview = {
 			/* eslint-enable */
 		},
 	},
+	tags: ["autodocs"],
 };
 
 export default preview;

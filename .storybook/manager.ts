@@ -4,9 +4,9 @@ import { create } from "storybook/theming";
 const theme = create({
 	base: "dark",
 	brandTarget: "_blank",
-	brandUrl: "https://madebydom.dev",
 	// Hacky way to set custom logo size
 	brandTitle: `<img src="/favicon.svg" width="32px" height="32px" />`,
+	brandUrl: "https://madebydom.dev",
 
 	fontBase: '"Inter", sans-serif',
 

@@ -1,18 +1,6 @@
 import type { Rule } from "eslint";
 
 export const noDefaultVariants: Rule.RuleModule = {
-	meta: {
-		type: "problem",
-		docs: {
-			description: "Disallow `defaultVariants` in tailwind-variants tv()",
-			recommended: true,
-		},
-		messages: {
-			noDefaultVariants:
-				"`defaultVariants` is not allowed. Please define default values in the component instead.",
-		},
-		schema: [],
-	},
 	create(context) {
 		return {
 			CallExpression(node) {
@@ -31,11 +19,23 @@ export const noDefaultVariants: Rule.RuleModule = {
 
 				if (defaultVariantsProp) {
 					context.report({
-						node: defaultVariantsProp,
 						messageId: "noDefaultVariants",
+						node: defaultVariantsProp,
 					});
 				}
 			},
 		};
+	},
+	meta: {
+		docs: {
+			description: "Disallow `defaultVariants` in tailwind-variants tv()",
+			recommended: true,
+		},
+		messages: {
+			noDefaultVariants:
+				"`defaultVariants` is not allowed. Please define default values in the component instead.",
+		},
+		schema: [],
+		type: "problem",
 	},
 };

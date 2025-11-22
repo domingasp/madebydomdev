@@ -1,8 +1,10 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
-import Heading from "../../components/typography/Heading/Heading.vue";
 import { h } from "vue";
+
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+import Heading from "../../components/typography/heading/Heading.vue";
+import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");

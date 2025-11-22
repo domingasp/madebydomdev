@@ -17,12 +17,14 @@ import tseslint from "typescript-eslint";
 import eslintPluginMadebydomdev from "./eslint-plugin-madebydomdev/index.ts";
 
 export default defineConfig([
-	{ ignores: ["dist/**", "node_modules/**", ".astro/**"] },
 	{
-		files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue,astro}"],
-		plugins: { js },
+		ignores: ["dist/**", "node_modules/**", ".astro/**"],
+	},
+	{
 		extends: ["js/recommended"],
+		files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue,astro}"],
 		languageOptions: { globals: globals.browser },
+		plugins: { js },
 	},
 	tseslint.configs.recommended,
 
@@ -50,23 +52,23 @@ export default defineConfig([
 					zones: [
 						// Cross-feature restrictions
 						{
-							target: "./src/features/footer",
-							from: "./src/features",
 							except: ["./footer"],
+							from: "./src/features",
+							target: "./src/features/footer",
 						},
 						{
-							target: "./src/features/header",
-							from: "./src/features",
 							except: ["./header"],
+							from: "./src/features",
+							target: "./src/features/header",
 						},
 						// Unidirectional codebase
 						{
-							target: "./src/features",
 							from: ["./src/pages", "./src/content"],
+							target: "./src/features",
 						},
 						{
-							target: ["./src/components"],
 							from: ["./src/features", "./src/pages", "./src/content"],
+							target: ["./src/components"],
 						},
 					],
 				},
@@ -107,14 +109,14 @@ export default defineConfig([
 	// #region Styling
 	{
 		files: ["**/*.css"],
-		plugins: { css },
+		// Until tailwind-csstree supports @custom-variant
+		// https://github.com/humanwhocodes/tailwind-csstree/issues/2
+		ignores: ["./src/styles/theme.css"],
 		language: "css/css",
 		languageOptions: {
 			customSyntax: tailwind4,
 		},
-		// Until tailwind-csstree supports @custom-variant
-		// https://github.com/humanwhocodes/tailwind-csstree/issues/2
-		ignores: ["./src/styles/theme.css"],
+		plugins: { css: css as never },
 	},
 	{
 		files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue,astro}"],
@@ -136,42 +138,53 @@ export default defineConfig([
 
 	// #region Other file types
 	{
+		extends: ["json/recommended"],
 		files: ["**/*.json"],
-		plugins: { json },
 		language: "json/json",
-		extends: ["json/recommended"],
+		plugins: { json: json as never },
 	},
 	{
+		extends: ["json/recommended"],
 		files: ["**/*.jsonc"],
-		plugins: { json },
 		language: "json/jsonc",
-		extends: ["json/recommended"],
+		plugins: { json: json as never },
 	},
 	{
+		extends: ["json/recommended"],
 		files: ["**/*.json5"],
-		plugins: { json },
 		language: "json/json5",
-		extends: ["json/recommended"],
+		plugins: { json: json as never },
 	},
 	{
-		files: ["**/*.md", "**/*.mdx"],
-		plugins: { markdown },
-		language: "markdown/gfm",
 		extends: ["markdown/recommended"],
+		files: ["**/*.md", "**/*.mdx"],
+		language: "markdown/gfm",
+		plugins: { markdown: markdown as never },
 	},
 	// #endregion Other file types
 
 	// #region Perfectionist
 	{
+		files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue,astro}"],
 		plugins: { perfectionist },
 		rules: {
+			"perfectionist/sort-exports": [
+				"error",
+				{
+					ignoreCase: true,
+					order: "asc",
+					type: "alphabetical",
+				},
+			],
 			"perfectionist/sort-imports": [
 				"error",
 				{
-					type: "alphabetical",
-					order: "asc",
-					ignoreCase: true,
-					newlinesBetween: 1,
+					customGroups: [
+						{
+							elementNamePattern: ["^vue$", "^@vue/.+", "^vue-.+"],
+							groupName: "vue",
+						},
+					],
 					groups: [
 						"type",
 						"builtin",
@@ -183,29 +196,19 @@ export default defineConfig([
 						"index",
 						"object",
 					],
-					customGroups: [
-						{
-							groupName: "vue",
-							elementNamePattern: ["^vue$", "^@vue/.+", "^vue-.+"],
-						},
-					],
+					ignoreCase: true,
+					newlinesBetween: 1,
+					order: "asc",
+					type: "alphabetical",
 				},
 			],
 			"perfectionist/sort-objects": [
 				"error",
 				{
-					type: "alphabetical",
-					order: "asc",
 					ignoreCase: true,
+					order: "asc",
 					partitionByNewLine: true,
-				},
-			],
-			"perfectionist/sort-exports": [
-				"error",
-				{
 					type: "alphabetical",
-					order: "asc",
-					ignoreCase: true,
 				},
 			],
 		},
@@ -214,12 +217,20 @@ export default defineConfig([
 
 	// #region Storybook
 	{
-		plugins: { perfectionist },
 		files: ["**/*.stories.ts"],
+		plugins: { perfectionist },
 		rules: {
 			"perfectionist/sort-objects": [
 				"error",
 				{
+					customGroups: {
+						args: "^args$",
+						argTypes: "^argTypes$",
+						component: "^component$",
+						globals: "^globals$",
+						parameters: "^parameters$",
+						title: "^title$",
+					},
 					groups: [
 						"title",
 						"component",
@@ -228,14 +239,6 @@ export default defineConfig([
 						"argTypes",
 						"args",
 					],
-					customGroups: {
-						title: "^title$",
-						component: "^component$",
-						globals: "^globals$",
-						parameters: "^parameters$",
-						argTypes: "^argTypes$",
-						args: "^args$",
-					},
 					// Allow any order within args and argTypes
 					ignorePattern: "args|argTypes",
 				},

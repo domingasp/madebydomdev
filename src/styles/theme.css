@@ -60,12 +60,21 @@
 	--padding-3xl: calc(var(--spacing) * 7);
 	--padding-4xl: calc(var(--spacing) * 8);
 
+	/*
+    Text/bg Color combinations to pass WCAG AA https://colorcontrast.app
+  */
+
+	--brand: #e7046a;
+
 	--color-focus: var(--color-blue-500);
 	--color-highlight: var(--color-yellow-300);
 
 	--color-background: var(--color-neutral-100);
 
 	--color-foreground: var(--color-neutral-800);
+	--color-foreground-disabled: oklch(
+		from var(--color-foreground) calc(l + 0.33) c h
+	);
 
 	--color-foreground-secondary: oklch(
 		from var(--color-foreground) calc(l + 0.25) c h
@@ -88,6 +97,27 @@
 	--color-fill-inverse-active: oklch(
 		from var(--color-fill-inverse) calc(l + 0.16) c h
 	);
+
+	--color-fill-brand: var(--brand);
+	--color-fill-brand-hover: oklch(
+		from var(--color-fill-brand) calc(l - 0.02) c h
+	);
+	--color-fill-brand-active: oklch(
+		from var(--color-fill-brand) calc(l - 0.04) c h
+	);
+	--color-fill-brand-disabled: oklch(
+		from var(--color-fill-brand) calc(l + 0.25) calc(c * 0.6) h
+	);
+
+	--color-on-fill-brand: var(--color-white);
+	--color-on-fill-brand-disabled: oklch(
+		from var(--color-on-fill-brand) calc(l - 0.01) c h
+	);
+
+	--color-border-brand: oklch(from var(--brand) calc(l - 0.06) c h);
+	--color-border-brand-disabled: oklch(
+		from var(--color-border-brand) calc(l + 0.25) calc(c * 0.6) h
+	);
 }
 
 @layer themes {
@@ -98,6 +128,9 @@
 		--color-background: var(--color-neutral-800);
 
 		--color-foreground: var(--color-neutral-100);
+		--color-foreground-disabled: oklch(
+			from var(--color-foreground) calc(l - 0.33) c h
+		);
 
 		--color-foreground-secondary: oklch(
 			from var(--color-foreground) calc(l - 0.25) c h
@@ -120,6 +153,27 @@
 		);
 		--color-fill-inverse-active: oklch(
 			from var(--color-fill-inverse) calc(l + 0.06) c h
+		);
+
+		--color-fill-brand: oklch(from var(--brand) calc(l - 0.02) c h);
+		--color-fill-brand-hover: oklch(
+			from var(--color-fill-brand) calc(l + 0.02) c h
+		);
+		--color-fill-brand-active: oklch(
+			from var(--color-fill-brand) calc(l + 0.04) c h
+		);
+		--color-fill-brand-disabled: oklch(
+			from var(--color-fill-brand) calc(l - 0.25) calc(c * 0.6) h
+		);
+
+		--color-on-fill-brand: var(--color-neutral-100);
+		--color-on-fill-brand-disabled: oklch(
+			from var(--color-on-fill-brand) calc(l - 0.25) c h
+		);
+
+		--color-border-brand: oklch(from var(--brand) calc(l + 0.066) c h);
+		--color-border-brand-disabled: oklch(
+			from var(--color-border-brand) calc(l - 0.275) calc(c * 0.6) h
 		);
 	}
 }

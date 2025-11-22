@@ -3,6 +3,8 @@ import type { StorybookConfig } from "@storybook/vue3-vite";
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 
+// TODO add theme support
+
 const config: StorybookConfig = {
 	addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
 	framework: {

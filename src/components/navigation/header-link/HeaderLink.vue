@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { computed, type AnchorHTMLAttributes } from "vue";
-import { type HeaderLinkVariants, headerLink } from "./header-link.variants";
+
+import { headerLink } from "./header-link.variants";
 import { useActiveLink } from "./useActiveLink.composable";
 
+// TODO eslint to sort interfaces/types
 interface Props
-	extends /* @vue-ignore */ Omit<AnchorHTMLAttributes, "href" | "class">,
-		HeaderLinkVariants {
+	extends /* @vue-ignore */ Omit<AnchorHTMLAttributes, "href" | "class"> {
 	href?: AnchorHTMLAttributes["href"]; // Otherwise href is on $attrs not props
 	class?: AnchorHTMLAttributes["class"];
-	// Server-side pathname injection - avoids CSS animation on page load
+	/** Server-side pathname injection - avoids CSS animation on page load */
 	astroPathname: string;
 }
 

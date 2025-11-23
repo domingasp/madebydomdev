@@ -2,9 +2,6 @@
 
 @layer base {
 	body {
-		background-color: var(--color-background);
-		color: var(--color-foreground);
-
 		display: flex;
 		min-height: 100vh;
 		flex-direction: column;

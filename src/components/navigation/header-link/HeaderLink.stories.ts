@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 import HeaderLink from "./HeaderLink.vue";
 
 const meta = {
-	title: "Navigation/HeaderLink",
+	title: "Navigation/Header Link",
 	component: HeaderLink,
 	parameters: {
 		controls: {

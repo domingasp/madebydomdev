@@ -1,9 +1,24 @@
-import type { Preview } from "@storybook/vue3-vite";
+import type { Preview, VueRenderer } from "@storybook/vue3-vite";
+
+import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { themes } from "storybook/theming";
 
 import "../src/styles/theme.css";
 import "../src/styles/base.css";
 
+import "./storybook.css";
+
 const preview: Preview = {
+	decorators: [
+		withThemeByDataAttribute<VueRenderer>({
+			attributeName: "data-theme",
+			defaultTheme: "light",
+			themes: {
+				dark: "dark",
+				light: "light",
+			},
+		}),
+	],
 	parameters: {
 		controls: {
 			disableSaveFromUI: true,
@@ -12,6 +27,7 @@ const preview: Preview = {
 				date: /Date$/,
 			},
 		},
+		docs: { theme: themes.dark },
 		options: {
 			// Sort stories alphabetically
 			/* eslint-disable */ //

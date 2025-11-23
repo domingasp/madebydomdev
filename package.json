@@ -38,6 +38,7 @@
 		"@iconify-json/lucide": "^1.2.72",
 		"@storybook/addon-a11y": "^10.0.7",
 		"@storybook/addon-docs": "^10.0.7",
+		"@storybook/addon-themes": "^10.0.8",
 		"@storybook/vue3-vite": "^10.0.7",
 		"@typescript-eslint/utils": "^8.46.4",
 		"@vitejs/plugin-vue": "^6.0.1",

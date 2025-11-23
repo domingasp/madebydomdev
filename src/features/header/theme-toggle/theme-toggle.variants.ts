@@ -2,6 +2,6 @@ import { tv } from "tailwind-variants";
 
 export const themeToggle = tv({
 	slots: {
-		icon: "absolute",
+		icon: "absolute inset-0",
 	},
 });

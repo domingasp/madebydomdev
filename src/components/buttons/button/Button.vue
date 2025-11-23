@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { ButtonHTMLAttributes, HTMLAttributes } from "vue";
+import {
+	computed,
+	useSlots,
+	type ButtonHTMLAttributes,
+	type HTMLAttributes,
+} from "vue";
 
 import { type ButtonVariants, button } from "./button.variants";
 
@@ -16,15 +21,34 @@ const props = withDefaults(defineProps<Props>(), {
 	disabled: false,
 	variant: "primary",
 });
+
+const slots = useSlots();
+const iconOnly = computed(() => !!slots.icon && !slots.default);
+const withIcon = computed(() => !!slots.icon);
+
+const styles = computed(() =>
+	button({
+		// TODO check whereelse using slots and decide best approach for class
+		// class: props.class,
+		disabled: props.disabled,
+		iconOnly: iconOnly.value,
+		variant: props.variant,
+		withIcon: withIcon.value && !iconOnly.value,
+	})
+);
 </script>
 
 <template>
 	<button
 		v-bind="$attrs"
 		:disabled="disabled"
-		:class="button({ variant, disabled, class: props.class })"
+		:class="
+			styles.base({
+				class: props.class,
+			})
+		"
 	>
-		<slot name="icon" />
+		<div v-if="!!slots.icon" :class="styles.icon()"><slot name="icon" /></div>
 		<slot />
 	</button>
 </template>

@@ -2,6 +2,7 @@ import type { StorybookConfig } from "@storybook/vue3-vite";
 
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
+import Icons from "unplugin-icons/vite";
 
 // TODO add theme support
 
@@ -19,6 +20,14 @@ const config: StorybookConfig = {
 		config.plugins = config.plugins || [];
 		// Must be first for `vue-component-meta` to work correctly
 		config.plugins.unshift(vue());
+		config.plugins.push(
+			Icons({
+				compiler: "vue3",
+				/* Fix vertical align in Safari and shifting during animation */
+				defaultClass: "will-change-transform",
+				scale: 1.5,
+			})
+		);
 		config.plugins.push(tailwindcss());
 		return config;
 	},

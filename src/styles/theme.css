@@ -85,8 +85,8 @@
 	);
 
 	--color-surface: var(--color-white);
-	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.015) c h);
-	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.03) c h);
+	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.05) c h);
+	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.065) c h);
 
 	--color-surface-secondary: var(--color-neutral-200);
 
@@ -141,7 +141,8 @@
 		);
 
 		--color-surface: oklch(from var(--color-neutral-800) calc(l + 0.05) c h);
-		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.02) c h);
+		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.01) c h);
+		--color-surface-active: oklch(from var(--color-surface) calc(l + 0.05) c h);
 
 		--color-surface-secondary: oklch(
 			from var(--color-surface) calc(l + 0.05) c h

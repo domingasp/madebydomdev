@@ -1,31 +1,48 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
-// TODO icon support
-
 export const button = tv({
-	base: "relative flex items-center justify-center rounded-xl border px-md py-xs font-medium transition-colors",
 	compoundVariants: [
 		{
-			class:
-				"border-border-brand-disabled bg-fill-brand-disabled text-on-fill-brand-disabled",
+			class: {
+				base: "border-border-brand-disabled bg-fill-brand-disabled text-on-fill-brand-disabled",
+			},
 			disabled: true,
 			variant: "primary",
 		},
 	],
+	slots: {
+		base: [
+			"relative flex items-center justify-center gap-sm rounded-xl border px-md py-sm",
+			"font-medium transition-colors",
+		],
+		icon: "relative shrink-0",
+	},
 	variants: {
 		disabled: {
 			false: "",
-			true: "cursor-not-allowed text-foreground-disabled",
+			true: { base: "cursor-not-allowed text-foreground-disabled" },
+		},
+		iconOnly: {
+			false: "",
+			true: { base: "px-sm" },
 		},
 		variant: {
-			primary: [
-				"border-border-brand bg-fill-brand text-on-fill-brand",
-				"enabled:hover:bg-fill-brand-hover enabled:active:bg-fill-brand-active",
-			],
-			transparent: [
-				"border-transparent",
-				"enabled:hover:bg-surface-hover enabled:active:bg-surface-active",
-			],
+			primary: {
+				base: [
+					"border-border-brand bg-fill-brand text-on-fill-brand",
+					"enabled:hover:bg-fill-brand-hover enabled:active:bg-fill-brand-active",
+				],
+			},
+			transparent: {
+				base: [
+					"border-transparent",
+					"enabled:hover:bg-surface-hover enabled:active:bg-surface-active",
+				],
+			},
+		},
+		withIcon: {
+			false: "",
+			true: { base: "pl-sm" },
 		},
 	},
 });

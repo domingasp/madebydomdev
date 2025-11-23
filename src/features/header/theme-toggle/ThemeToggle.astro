@@ -19,11 +19,11 @@ const { icon } = themeToggle();
 	variant="transparent"
 >
 	<!-- Spacer element -->
-	<IconMoon class="pointer-events-none opacity-0" />
+	<IconMoon class="pointer-events-none opacity-0" slot="icon" />
 
-	<IconMoon data-theme-icon="dark" class={icon()} />
-	<IconSun data-theme-icon="light" class={icon()} />
-	<IconLaptop data-theme-icon="system" class={icon()} />
+	<IconMoon data-theme-icon="dark" class={icon()} slot="icon" />
+	<IconSun data-theme-icon="light" class={icon()} slot="icon" />
+	<IconLaptop data-theme-icon="system" class={icon()} slot="icon" />
 </Button>
 
 <!-- Prevent FOUC for theme icons -->

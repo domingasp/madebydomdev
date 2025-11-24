@@ -28,8 +28,6 @@ const withIcon = computed(() => !!slots.icon);
 
 const styles = computed(() =>
 	button({
-		// TODO check whereelse using slots and decide best approach for class
-		// class: props.class,
 		disabled: props.disabled,
 		iconOnly: iconOnly.value,
 		variant: props.variant,

@@ -1,16 +1,166 @@
-@import "tailwindcss";
+@reference "./theme.css";
 
-@theme {
-  --color-background: var(--color-neutral-800);
+@layer base {
+	body {
+		display: flex;
+		min-height: 100vh;
+		flex-direction: column;
+	}
 
-  --color-foreground: var(--color-neutral-100);
-}
+	header,
+	main,
+	footer {
+		@apply mx-auto max-w-screen-sm w-full;
+	}
 
-html {
-  font-size: 14px;
-}
+	body {
+		@apply overflow-hidden;
+	}
 
-body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+	main {
+		@apply px-md;
+		flex: 1;
+	}
+
+	blockquote {
+		@apply px-xl py-md mt-4 mx-4 rounded-lg;
+		position: relative;
+		overflow: hidden;
+	}
+
+	blockquote::before {
+		@apply bg-foreground-secondary rounded-lg;
+		/* Eslint doesn't support w-1.25 */
+		width: calc(var(--spacing, 0.25rem) * 1.25);
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	blockquote cite {
+		@apply block italic text-foreground-secondary mt-3 text-sm;
+	}
+
+	blockquote p:first-child {
+		@apply m-0;
+	}
+
+	cite a {
+		@apply text-focus p-xs;
+	}
+
+	img {
+		@apply rounded-lg;
+	}
+
+	p {
+		@apply mt-4;
+	}
+
+	ul,
+	ol {
+		@apply mt-2 pl-5;
+	}
+
+	ul {
+		list-style-type: disc;
+	}
+
+	ul ul {
+		list-style-type: circle;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	li {
+		@apply mt-2;
+	}
+
+	li:first-child {
+		@apply mt-0;
+	}
+
+	mark {
+		@apply bg-highlight;
+		/* Eslint doesn't support px-0.25 */
+		padding-inline: calc(var(--spacing, 0.25rem) * 0.25);
+	}
+
+	section[data-footnotes] {
+		@apply text-xs;
+	}
+
+	a {
+		@apply text-focus hover:underline;
+	}
+
+	hr {
+		@apply border-foreground-secondary;
+	}
+
+	pre {
+		@apply px-lg py-md rounded-lg mt-4;
+	}
+
+	abbr {
+		@apply italic;
+	}
+
+	table {
+		@apply w-full mt-4 border-spacing-0 border-separate rounded-lg overflow-hidden;
+	}
+
+	/* Header & footer */
+	thead,
+	tfoot {
+		@apply bg-surface-secondary;
+	}
+
+	/* All cells */
+	th,
+	td {
+		@apply p-sm text-left;
+	}
+
+	/* Header cells */
+	th {
+		@apply border-background border-b-surface-secondary border-b border-r;
+	}
+
+	th:first-child {
+		@apply border-l-background;
+	}
+
+	th:last-child {
+		@apply border-r-surface-secondary;
+	}
+
+	/* Body cells */
+	td {
+		@apply bg-surface border-background border-b border-r;
+	}
+
+	td:first-child {
+		@apply border-l border-l-surface-secondary;
+	}
+
+	td:last-child {
+		@apply border-r border-r-surface-secondary;
+	}
+
+	tr:last-child td {
+		@apply border-b-surface-secondary;
+	}
+
+	tr:last-child td:first-child {
+		@apply rounded-bl-lg;
+	}
+
+	tr:last-child td:last-child {
+		@apply rounded-br-lg;
+	}
 }

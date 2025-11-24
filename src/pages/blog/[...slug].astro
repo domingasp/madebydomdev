@@ -1,20 +1,33 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { h } from "vue";
+
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+import Heading from "../../components/typography/heading/Heading.vue";
+import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getCollection("blog");
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
+<BlogPost {...post.data} slug={post.id}>
+	<Content
+		components={{
+			h1: h(Heading, { level: 1 }),
+			h2: h(Heading, { level: 2 }),
+			h3: h(Heading, { level: 3 }),
+			h4: h(Heading, { level: 4 }),
+			h5: h(Heading, { level: 5 }),
+			h6: h(Heading, { level: 6 }),
+		}}
+	/>
 </BlogPost>

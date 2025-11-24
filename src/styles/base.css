@@ -1,0 +1,42 @@
+@reference "./theme.css";
+
+@layer base {
+	*:focus-visible {
+		@apply z-50 outline-2 outline-focus rounded-sm;
+	}
+
+	::selection {
+		background-color: #f89b29;
+	}
+
+	html {
+		font-size: 87.5%;
+	}
+
+	/* Global colors */
+	body {
+		background-color: var(--color-background);
+		color: var(--color-foreground);
+	}
+}
+
+/* overlayscrollbars theme */
+.os-theme-madebydomdev {
+	--os-size: 22px;
+	--os-padding-perpendicular: 8px;
+	--os-padding-axis: 8px;
+	--os-track-border-radius: 10px;
+	--os-handle-interactive-area-offset: 4px;
+	--os-handle-border-radius: 10px;
+	--os-handle-bg: var(--color-fill-inverse);
+	--os-handle-bg-hover: var(--color-fill-inverse-hover);
+	--os-handle-bg-active: var(--color-fill-inverse-active);
+}
+
+@media (width < 580px) {
+	.os-theme-madebydomdev {
+		--os-size: 10px;
+		--os-padding-perpendicular: 2px;
+		--os-padding-axis: 4px;
+	}
+}

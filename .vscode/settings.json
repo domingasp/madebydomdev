@@ -1,10 +1,17 @@
 {
-  "git.inputValidation": true,
-  "git.inputValidationSubjectLength": 50,
-  "git.inputValidationLength": 72,
-  "css.customData": [".vscode/tailwind.json"],
-  "tailwindCSS.experimental.classRegex": [
-    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
-  "tailwindCSS.rootFontSize": 14
+	"git.inputValidation": true,
+	"git.inputValidationSubjectLength": 50,
+	"git.inputValidationLength": 72,
+	"css.customData": [".vscode/tailwind.json"],
+	"tailwindCSS.classFunctions": ["tv"],
+	"tailwindCSS.rootFontSize": 14,
+	"eslint.validate": [
+		"vue",
+		"astro",
+		"md",
+		"mdx",
+		"css",
+		"typescript",
+		"javascript"
+	]
 }

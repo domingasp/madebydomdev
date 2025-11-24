@@ -1,0 +1,187 @@
+---
+import IconLaptop from "~icons/lucide/laptop";
+import IconMoon from "~icons/lucide/moon";
+import IconSun from "~icons/lucide/sun";
+
+import Button from "../../../components/buttons/button/Button.vue";
+
+import { themeToggle } from "./theme-toggle.variants";
+
+/** Astro component as it requires `<script is:inline />` to prevent FOUC, Vue cannot do that */
+
+const { icon } = themeToggle();
+---
+
+<Button
+	data-theme-toggle
+	aria-label="Toggle Theme"
+	title="Toggle Theme"
+	variant="transparent"
+>
+	<!-- Spacer element -->
+	<IconMoon class="pointer-events-none opacity-0" slot="icon" />
+
+	<IconMoon data-theme-icon="dark" class={icon()} slot="icon" />
+	<IconSun data-theme-icon="light" class={icon()} slot="icon" />
+	<IconLaptop data-theme-icon="system" class={icon()} slot="icon" />
+</Button>
+
+<!-- Prevent FOUC for theme icons -->
+<script is:inline>
+	(() => {
+		const theme = localStorage.getItem("theme") || "system";
+		document.querySelectorAll("[data-theme-icon]").forEach((icon) => {
+			if (icon.getAttribute("data-theme-icon") === theme) {
+				icon.classList.remove("hidden");
+			} else {
+				icon.classList.add("hidden");
+			}
+		});
+	})();
+</script>
+
+<script>
+	const themes = { DARK: "dark", LIGHT: "light", SYSTEM: "system" } as const;
+	type Themes = (typeof themes)[keyof typeof themes];
+
+	const themeOrder: Themes[] = [themes.LIGHT, themes.DARK, themes.SYSTEM];
+
+	/** Apply selected theme */
+	function applyTheme(theme: Themes) {
+		if (theme === themes.SYSTEM) {
+			const prefersDark = window.matchMedia(
+				"(prefers-color-scheme: dark)"
+			).matches;
+
+			document.documentElement.dataset.theme = prefersDark
+				? themes.DARK
+				: themes.LIGHT;
+		} else {
+			document.documentElement.dataset.theme = theme;
+		}
+	}
+
+	/** Get all theme icons */
+	function getThemeIcons() {
+		return document.querySelectorAll("[data-theme-icon]");
+	}
+
+	/** Initialize the theme icon based on the theme */
+	function initThemeIcon(theme: Themes) {
+		getThemeIcons().forEach((icon) => {
+			icon.classList.remove(
+				"animate-slide-in-from-left",
+				"animate-slide-out-to-right"
+			);
+
+			if (icon.getAttribute("data-theme-icon") === theme) {
+				icon.classList.remove("hidden");
+			} else {
+				icon.classList.add("hidden");
+			}
+		});
+	}
+
+	/** Switch, with animation, the theme icon based on the theme */
+	function switchThemeIcon(theme: Themes) {
+		getThemeIcons().forEach((icon) => {
+			icon.classList.remove(
+				"animate-slide-in-from-left",
+				"animate-slide-out-to-right"
+			);
+
+			if (icon.getAttribute("data-theme-icon") === theme) {
+				icon.classList.remove("hidden");
+				icon.classList.add("animate-slide-in-from-left");
+			} else if (!icon.classList.contains("hidden")) {
+				icon.classList.add("animate-slide-out-to-right");
+
+				const handleAnimationEnd = () => {
+					icon.classList.add("hidden");
+					icon.classList.remove("animate-slide-out-to-right");
+					icon.removeEventListener("animationend", handleAnimationEnd);
+				};
+				icon.addEventListener("animationend", handleAnimationEnd);
+			}
+		});
+	}
+
+	/** Find and apply next theme */
+	function handleThemeToggle() {
+		const current = (localStorage.getItem("theme") || themes.SYSTEM) as Themes;
+		const next =
+			themeOrder[(themeOrder.indexOf(current) + 1) % themeOrder.length];
+
+		localStorage.setItem("theme", next);
+		applyTheme(next);
+		switchThemeIcon(next);
+	}
+
+	/** Add event listener for theme toggle */
+	function registerThemeToggle() {
+		const btn = document.querySelector("[data-theme-toggle]");
+		btn?.addEventListener("click", handleThemeToggle);
+	}
+
+	/** Initialize the theme */
+	function initTheme() {
+		const savedTheme = (localStorage.getItem("theme") ||
+			themes.SYSTEM) as Themes;
+
+		initThemeIcon(savedTheme);
+		applyTheme(savedTheme);
+	}
+
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", () => {
+			const savedTheme = (localStorage.getItem("theme") ||
+				themes.SYSTEM) as Themes;
+
+			if (savedTheme === themes.SYSTEM) {
+				applyTheme(themes.SYSTEM);
+			}
+		});
+
+	initTheme();
+	registerThemeToggle();
+
+	document.addEventListener("astro:after-swap", () => {
+		initTheme();
+		registerThemeToggle();
+	});
+</script>
+
+<style>
+	@reference "../../../styles/global.css";
+
+	@keyframes slide-in-from-left {
+		from {
+			transform: translateX(-12px) scale(75%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0) scale(100%);
+			opacity: 1;
+		}
+	}
+
+	@keyframes slide-out-to-right {
+		from {
+			transform: translateX(0) scale(100%);
+			opacity: 1;
+		}
+		to {
+			transform: translateX(12px) scale(75%);
+			opacity: 0;
+		}
+	}
+
+	.animate-slide-in-from-left {
+		animation: slide-in-from-left 0.2s ease-in forwards;
+	}
+
+	.animate-slide-out-to-right {
+		animation: slide-out-to-right 0.2s ease-out forwards;
+	}
+</style>

@@ -11,6 +11,10 @@ interface Props extends /* @vue-ignore */ Omit<HTMLAttributes, "class"> {
 	 */
 	align?: TextVariants["align"];
 	/**
+	 * HTML element to render the text as
+	 */
+	as?: TextElement;
+	/**
 	 * Whether the text is bold
 	 */
 	bold?: TextVariants["bold"];
@@ -22,10 +26,6 @@ interface Props extends /* @vue-ignore */ Omit<HTMLAttributes, "class"> {
 	 * Text size
 	 */
 	size?: TextVariants["size"];
-	/**
-	 * HTML element to render the text as
-	 */
-	as?: TextElement;
 	class?: HTMLAttributes["class"];
 }
 

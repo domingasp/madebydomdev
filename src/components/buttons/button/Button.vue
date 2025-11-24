@@ -10,9 +10,9 @@ import { type ButtonVariants, button } from "./button.variants";
 
 interface Props
 	extends /* @vue-ignore */ Omit<ButtonHTMLAttributes, "class" | "disabled"> {
+	disabled?: ButtonVariants["disabled"];
 	/** Button intent */
 	variant?: ButtonVariants["variant"];
-	disabled?: ButtonVariants["disabled"];
 	class?: HTMLAttributes["class"];
 }
 

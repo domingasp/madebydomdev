@@ -7,10 +7,10 @@ import { useActiveLink } from "./useActiveLink.composable";
 // TODO eslint to sort interfaces/types
 interface Props
 	extends /* @vue-ignore */ Omit<AnchorHTMLAttributes, "href" | "class"> {
-	href?: AnchorHTMLAttributes["href"]; // Otherwise href is on $attrs not props
-	class?: AnchorHTMLAttributes["class"];
 	/** Server-side pathname injection - avoids CSS animation on page load */
 	astroPathname: string;
+	href?: AnchorHTMLAttributes["href"]; // Otherwise href is on $attrs not props
+	class?: AnchorHTMLAttributes["class"];
 }
 
 const props = defineProps<Props>();

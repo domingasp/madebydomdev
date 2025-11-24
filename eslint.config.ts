@@ -202,6 +202,40 @@ export default defineConfig([
 					type: "alphabetical",
 				},
 			],
+			"perfectionist/sort-interfaces": [
+				"error",
+				{
+					customGroups: {
+						class: "^class$",
+					},
+					groups: [
+						"required-property",
+						"optional-property",
+						"class",
+						"required-method",
+						"optional-method",
+					],
+					order: "asc",
+					type: "natural",
+				},
+			],
+			"perfectionist/sort-object-types": [
+				"error",
+				{
+					customGroups: {
+						class: "^class$",
+					},
+					groups: [
+						"required-property",
+						"optional-property",
+						"class",
+						"required-method",
+						"optional-method",
+					],
+					order: "asc",
+					type: "natural",
+				},
+			],
 			"perfectionist/sort-objects": [
 				"error",
 				{

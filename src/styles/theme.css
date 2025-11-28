@@ -69,26 +69,32 @@
 	--color-focus: var(--color-blue-500);
 	--color-highlight: var(--color-yellow-300);
 
-	--color-background: var(--color-neutral-100);
+	--color-background: var(--color-neutral-50);
 
 	--color-foreground: var(--color-neutral-800);
 	--color-foreground-disabled: oklch(
-		from var(--color-foreground) calc(l + 0.33) c h
+		from var(--color-foreground) calc(l + 0.5) c h
 	);
 
 	--color-foreground-secondary: oklch(
 		from var(--color-foreground) calc(l + 0.25) c h
 	);
 
-	--color-foreground-secondary: oklch(
-		from var(--color-foreground) calc(l + 0.25) c h
-	);
+	--color-border: var(--color-neutral-300);
+	--color-border-disabled: oklch(from var(--color-border) calc(l + 0.05) c h);
 
 	--color-surface: var(--color-white);
 	--color-surface-hover: oklch(from var(--color-surface) calc(l - 0.05) c h);
 	--color-surface-active: oklch(from var(--color-surface) calc(l - 0.065) c h);
 
+	--color-surface-disabled: oklch(
+		from var(--color-surface) calc(l - 0.025) calc(c * 0.1) h
+	);
+
 	--color-surface-secondary: var(--color-neutral-200);
+
+	--color-foreground-critical: var(--color-red-600);
+	--color-border-critical: var(--color-red-600);
 
 	--color-fill-inverse: var(--color-neutral-800);
 	--color-fill-inverse-hover: oklch(
@@ -129,23 +135,34 @@
 
 		--color-foreground: var(--color-neutral-100);
 		--color-foreground-disabled: oklch(
-			from var(--color-foreground) calc(l - 0.33) c h
+			from var(--color-foreground) calc(l - 0.5) c h
 		);
 
 		--color-foreground-secondary: oklch(
 			from var(--color-foreground) calc(l - 0.25) c h
 		);
 
-		--color-foreground-secondary: oklch(
-			from var(--color-foreground) calc(l - 0.25) c h
-		);
+		--color-border: var(--color-neutral-600);
+		--color-border-disabled: oklch(from var(--color-border) calc(l - 0.1) c h);
 
 		--color-surface: oklch(from var(--color-neutral-800) calc(l + 0.05) c h);
 		--color-surface-hover: oklch(from var(--color-surface) calc(l + 0.01) c h);
 		--color-surface-active: oklch(from var(--color-surface) calc(l + 0.05) c h);
 
+		--color-surface-disabled: oklch(
+			from var(--color-surface) calc(l - 0.04) calc(c * 0.75) h
+		);
+
 		--color-surface-secondary: oklch(
 			from var(--color-surface) calc(l + 0.05) c h
+		);
+
+		--color-critical: var(--color-red-500);
+		--color-foreground-critical: oklch(
+			from var(--color-critical) calc(l + 0.03) calc(c * 0.8) h
+		);
+		--color-border-critical: oklch(
+			from var(--color-critical) calc(l + 0.03) calc(c * 0.8) h
 		);
 
 		--color-fill-inverse: var(--color-neutral-100);

@@ -2,7 +2,7 @@
 
 @layer base {
 	*:focus-visible {
-		@apply z-50 outline-2 outline-focus rounded-sm;
+		@apply z-50 outline-2 outline-focus rounded-sm duration-150;
 	}
 
 	::selection {

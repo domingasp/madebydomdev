@@ -9,15 +9,13 @@ const meta = {
 	title: "Inputs/Text Input",
 	component: TextInput,
 	parameters: {
-		controls: { include: ["placeholder", "error", "disabled"] },
+		controls: { include: ["placeholder", "error"] },
 	},
 	argTypes: {
 		error: { control: "boolean" },
-		disabled: { control: "boolean" },
 	},
 	args: {
 		error: false,
-		disabled: false,
 		placeholder: "Enter text",
 	},
 } satisfies Meta<typeof TextInput>;
@@ -42,17 +40,11 @@ export const ErrorMessage: Story = {
 	},
 };
 
-export const Disabled: Story = {
-	args: {
-		disabled: true,
-	},
-};
-
-export const LeadingAndTrailing: Story = {
+export const WithSections: Story = {
 	args: {
 		// Used for code snippet in docs
-		leading: `<IconUser />`,
-		trailing: `<IconPanel />`,
+		left: `<IconUser />`,
+		right: `<IconPanel />`,
 	},
 	render: (args) => ({
 		components: { IconPanel, IconUser, TextInput },
@@ -61,10 +53,10 @@ export const LeadingAndTrailing: Story = {
 		},
 		template: /*html*/ `
 			<TextInput v-bind="args">
-				<template #leading>
+				<template #left>
 					<IconUser />
 				</template>
-				<template #trailing>
+				<template #right>
 					<IconPanel />
 				</template>
 			</TextInput>

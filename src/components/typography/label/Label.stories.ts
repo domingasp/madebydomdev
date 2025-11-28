@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithLeadingIcon: Story = {
+export const WithIcon: Story = {
 	args: {
 		default: /*html*/ `<IconUser />First Name`,
 	},

@@ -8,9 +8,7 @@ import {
 
 import { type ButtonVariants, button } from "./button.variants";
 
-interface Props
-	extends /* @vue-ignore */ Omit<ButtonHTMLAttributes, "class" | "disabled"> {
-	disabled?: ButtonVariants["disabled"];
+interface Props extends /* @vue-ignore */ Omit<ButtonHTMLAttributes, "class"> {
 	/** Button intent */
 	variant?: ButtonVariants["variant"];
 	class?: HTMLAttributes["class"];
@@ -18,7 +16,6 @@ interface Props
 
 const props = withDefaults(defineProps<Props>(), {
 	class: undefined,
-	disabled: false,
 	variant: "primary",
 });
 
@@ -28,7 +25,6 @@ const withIcon = computed(() => !!slots.icon);
 
 const styles = computed(() =>
 	button({
-		disabled: props.disabled,
 		iconOnly: iconOnly.value,
 		variant: props.variant,
 		withIcon: withIcon.value && !iconOnly.value,
@@ -39,7 +35,6 @@ const styles = computed(() =>
 <template>
 	<button
 		v-bind="$attrs"
-		:disabled="disabled"
 		:class="
 			styles.base({
 				class: props.class,

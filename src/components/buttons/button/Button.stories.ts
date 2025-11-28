@@ -15,12 +15,11 @@ const meta = {
 	component: Button,
 	parameters: {
 		controls: {
-			include: ["variant", "disabled", "class", "default"],
+			include: ["variant", "class", "default"],
 		},
 	},
 	args: {
 		variant: "primary",
-		disabled: false,
 		default: "Button",
 	},
 } satisfies Meta<typeof Button>;
@@ -39,12 +38,6 @@ export const Variants: Story = {
 		},
 		template: /*html*/ `<ButtonVariants prop="variant" :variants="variants" :restProps="args" />`,
 	}),
-};
-
-export const Disabled: Story = {
-	args: {
-		disabled: true,
-	},
 };
 
 export const withIcon: Story = {

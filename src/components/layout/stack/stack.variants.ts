@@ -11,6 +11,14 @@ export const stack = tv({
 			end: "items-end",
 			start: "items-start",
 		},
+		justify: {
+			around: "justify-around",
+			between: "justify-between",
+			center: "justify-center-safe",
+			end: "justify-end",
+			evenly: "justify-evenly",
+			start: "justify-start",
+		},
 	},
 });
 

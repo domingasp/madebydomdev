@@ -13,6 +13,7 @@ import Stack from "./Stack.vue";
 
 const StackVariants = RenderVariantsFactory.for(Stack);
 const align = getVariantOptions<StackVariants>(stack)("align");
+const justify = getVariantOptions<StackVariants>(stack)("justify");
 const spacing = getVariantOptions<StackVariants>(stack)("spacing");
 
 const words = Array.from({ length: 3 }).map(() => faker.lorem.word());
@@ -64,5 +65,19 @@ export const Align: Story = {
 			return { args, align };
 		},
 		template: /*html*/ `<StackVariants prop="align" :variants="align" :restProps="args"/>`,
+	}),
+};
+
+export const Justify: Story = {
+	parameters: { controls: { disable: true } },
+	args: { spacing: "xs" },
+	render: (args) => ({
+		components: { Stack, StackVariants },
+		setup() {
+			args.default = words.map((word) => h(Text, null, () => word));
+			return { args, justify };
+		},
+		template: /*html*/ `<StackVariants prop="justify" :variants="justify" :restProps="args"
+			class="h-[10rem]" variantClass="h-full"/>`,
 	}),
 };

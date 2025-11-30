@@ -16,6 +16,7 @@ interface Props {
 	variants: T[P][];
 	orientation?: "vertical" | "horizontal";
 	restProps?: Partial<T>;
+	variantClass?: string;
 	class?: string;
 }
 
@@ -23,6 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 	class: undefined,
 	orientation: "horizontal",
 	restProps: () => ({}),
+	variantClass: undefined,
 });
 
 const isHorizontal = computed(() => props.orientation === "horizontal");
@@ -35,11 +37,15 @@ const isHorizontal = computed(() => props.orientation === "horizontal");
 			:key="String(variant)"
 			align="center"
 			spacing="sm"
+			class="h-full"
 		>
 			<Text align="center" class="self-center" color="secondary" size="sm">
 				{{ variant }}
 			</Text>
-			<component :is="component" v-bind="{ ...restProps, [prop]: variant }">
+			<component
+				:is="component"
+				v-bind="{ ...restProps, [prop]: variant, class: props.variantClass }"
+			>
 				<slot />
 			</component>
 		</Stack>
@@ -50,7 +56,10 @@ const isHorizontal = computed(() => props.orientation === "horizontal");
 			<Text align="center" class="self-center" color="secondary" size="sm">
 				{{ variant }}
 			</Text>
-			<component :is="component" v-bind="{ ...restProps, [prop]: variant }">
+			<component
+				:is="component"
+				v-bind="{ ...restProps, [prop]: variant, class: props.variantClass }"
+			>
 				<slot />
 			</component>
 		</template>

@@ -7,6 +7,10 @@ interface Props {
 	 */
 	align?: StackVariants["align"];
 	/**
+	 * Justification of items along the main axis
+	 */
+	justify?: StackVariants["justify"];
+	/**
 	 * Spacing between items
 	 */
 	spacing?: StackVariants["spacing"];
@@ -16,6 +20,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
 	align: "start",
 	class: undefined,
+	justify: "start",
 	spacing: "md",
 });
 </script>

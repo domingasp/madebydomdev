@@ -11,6 +11,7 @@ interface Props extends /* @vue-ignore */ InputHTMLAttributes {
 }
 
 const props = defineProps<Props>();
+const model = defineModel<string>();
 
 const slots = useSlots();
 const hasErrorMessage = computed(
@@ -27,12 +28,14 @@ const styles = computed(() =>
 
 <template>
 	<div :class="styles.base()">
-		<div v-if="!!slots.left" :class="styles.static()">
-			<slot name="left" />
-		</div>
-		<input v-bind="$attrs" :class="styles.input()" />
-		<div v-if="!!slots.right" :class="styles.static({ class: 'right-0' })">
-			<slot name="right" />
+		<div class="relative">
+			<div v-if="!!slots.left" :class="styles.static()">
+				<slot name="left" />
+			</div>
+			<input v-model="model" v-bind="$attrs" :class="styles.input()" />
+			<div v-if="!!slots.right" :class="styles.static({ class: 'right-0' })">
+				<slot name="right" />
+			</div>
 		</div>
 
 		<Text v-if="hasErrorMessage" as="span" :class="styles.error()">

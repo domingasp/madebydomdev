@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import EmailSignUpForm from "../features/email-signup-form/EmailSignUpForm.vue";
 import Footer from "../features/footer/Footer.astro";
 import Header from "../features/header/Header.astro";
 ---
@@ -14,6 +15,7 @@ import Header from "../features/header/Header.astro";
 		<Header />
 		<main>
 			<h1 class="text-4xl font-bold">🧑‍🚀 Hello, Astronaut!</h1>
+			<EmailSignUpForm client:load />
 		</main>
 		<Footer />
 	</body>

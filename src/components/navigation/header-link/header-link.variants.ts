@@ -6,7 +6,7 @@ export const headerLink = tv({
 		line: [
 			"relative",
 			"after:absolute after:bottom-0 after:left-0 after:-z-1 after:h-1 after:w-full after:content-['']",
-			"after:bg-linear-to-r after:from-[#FF0F7B] after:to-[#F89B29]",
+			"after:animate-gradient after:gradient-brand",
 			"after:transition-transform after:duration-250",
 			"after:origin-bottom-right after:scale-x-0",
 			"group-hover:after:origin-bottom-left group-hover:after:scale-x-100",

@@ -60,6 +60,19 @@
 	--padding-3xl: calc(var(--spacing) * 7);
 	--padding-4xl: calc(var(--spacing) * 8);
 
+	--animate-gradient: gradient 10s ease-in-out infinite;
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
 	/*
     Text/bg Color combinations to pass WCAG AA https://colorcontrast.app
   */
@@ -160,4 +173,8 @@
 
 		--color-border-brand: oklch(from var(--brand) calc(l + 0.066) c h);
 	}
+}
+
+@utility gradient-brand {
+	@apply bg-linear-to-r from-[#FF0F7B] to-[#F89B29] bg-size-[120%];
 }

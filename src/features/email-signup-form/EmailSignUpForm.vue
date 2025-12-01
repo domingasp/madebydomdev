@@ -49,7 +49,7 @@ const onSubmit = handleSubmit((values) => {
 				class="absolute top-1/2 -translate-y-1/2 -rotate-8 text-[10rem] opacity-10"
 			/>
 			<Heading
-				class="m-0 bg-linear-to-r from-[#FF0F7B] to-[#F89B29] bg-clip-text text-transparent"
+				class="m-0 animate-gradient gradient-brand bg-clip-text text-transparent"
 				:level="2"
 				>Email List</Heading
 			>
